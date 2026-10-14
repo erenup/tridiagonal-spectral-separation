@@ -21,16 +21,16 @@ from open questions about roundoff and nearly linear bit complexity.
 ## Exact-arithmetic theorem
 
 For every integer $n\geq2$, every Hermitian tridiagonal
-$T\in\mathbb C^{n\times n}$ with induced Euclidean norm $\|T\|_2\leq1$,
-and every real $0<\delta<1/2$, Theorem 1.1 gives a deterministic
+$T\in\mathbb C^{n\times n}$ with induced Euclidean norm $\lVert T\rVert_2\leq1$,
+and every real $0\lt\delta\lt1/2$, Theorem 1.1 gives a deterministic
 algorithm which, given the three diagonals of $T$, constructs
 
 $$
-D=t\operatorname{diag}(1,\ldots,n),\qquad 0\leq t\leq\delta/n,
+D=t\mathrm{diag}(1,\ldots,n),\qquad 0\leq t\leq\delta/n,
 $$
 
-with $\|D\|_2\leq\delta$ and
-$\operatorname{gap}(T+D)>2^{-88}(\delta/n)^{42}$, using
+with $\lVert D\rVert_2\leq\delta$ and
+$\mathrm{gap}(T+D)\gt2^{-88}(\delta/n)^{42}$, using
 $O(n[1+\log(n/\delta)]^3)$ exact real arithmetic operations and
 comparisons. The gap is the minimum consecutive difference of the
 increasingly ordered eigenvalues, with multiplicities. Complex edges,
@@ -62,16 +62,16 @@ $\eta=Q^{-1}$, $\beta=2^{-a}$ and $\ell=\beta4^{-K}$.
 The finite input consists of $n,d$ and a Hermitian tridiagonal proxy
 $T_0$ whose real diagonal and real/imaginary edge components are
 multiples of $\eta$ and differ by at most $\eta$ from those of the
-promised Hermitian tridiagonal matrix $T$ with $\|T\|_2\leq1$. The entries of $T$ need not be rational
+promised Hermitian tridiagonal matrix $T$ with $\lVert T\rVert_2\leq1$. The entries of $T$ need not be rational
 or separately accessible. Reading and rounding an original rational
 representation has additional cost.
 
-Theorem 9.1 returns a dyadic $c$ and $D=c\operatorname{diag}(1,\ldots,n)$
+Theorem 9.1 returns a dyadic $c$ and $D=c\mathrm{diag}(1,\ldots,n)$
 with
 
 $$
 0\leq nc\leq\delta/4,\qquad
-\operatorname{gap}(T+D)>2^{-100}\delta^4/n^{42}.
+\mathrm{gap}(T+D)\gt2^{-100}\delta^4/n^{42}.
 $$
 
 It uses $O(n^2p(1+\log n))$ integer operations on $O(p)$-bit integers,
@@ -82,7 +82,7 @@ unbounded-precision-real primitives.
 
 The $O(np)$-bit certificate consists of ordered-eigenvalue enclosures at
 $T_0+(c-r)X$, $T_0+cX$, $T_0+(c+r)X$, with
-$X=\operatorname{diag}(1,\ldots,n)$ and $r=\ell/4$, and a rational
+$X=\mathrm{diag}(1,\ldots,n)$ and $r=\ell/4$, and a rational
 convexity-defect bound. An independent rational-inertia verifier checks
 the intended input, the enclosures and that bound. The same output and
 certificate apply to every normalized Hermitian tridiagonal matrix in the

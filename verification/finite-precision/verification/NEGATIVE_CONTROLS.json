@@ -1,0 +1,114 @@
+{
+  "check_controls.py": [
+    {
+      "control": "remove_imaginary_edge_with_consistent_binding",
+      "reason": "ENCLOSURE_UPPER"
+    },
+    {
+      "control": "zero_center_with_consistent_diagonal",
+      "reason": "OUTPUT_RANGE"
+    }
+  ],
+  "run_tests.py": [
+    {
+      "control": "altered_proxy",
+      "reason": "INPUT_BINDING"
+    },
+    {
+      "control": "swapped_proxy",
+      "reason": "INPUT_BINDING"
+    },
+    {
+      "control": "lower_enclosure",
+      "reason": "ENCLOSURE_LOWER"
+    },
+    {
+      "control": "upper_enclosure",
+      "reason": "ENCLOSURE_UPPER"
+    },
+    {
+      "control": "wide_interval",
+      "reason": "INTERVAL_WIDTH"
+    },
+    {
+      "control": "false_defect_bound",
+      "reason": "DEFECT_FORMULA"
+    },
+    {
+      "control": "defect_denominator",
+      "reason": "DEFECT_DENOMINATOR"
+    },
+    {
+      "control": "radius",
+      "reason": "PARAM_RADIUS"
+    },
+    {
+      "control": "precision",
+      "reason": "PARAM_PRECISION"
+    },
+    {
+      "control": "budget",
+      "reason": "PARAM_BUDGET"
+    },
+    {
+      "control": "a_formula",
+      "reason": "PARAM_FORMULA"
+    },
+    {
+      "control": "output_diagonal",
+      "reason": "OUTPUT_DIAGONAL"
+    },
+    {
+      "control": "output_budget",
+      "reason": "OUTPUT_BUDGET"
+    },
+    {
+      "control": "bool_input",
+      "reason": "INPUT_INT"
+    },
+    {
+      "control": "bool_embedded",
+      "reason": "INPUT_BINDING"
+    },
+    {
+      "control": "bool_precision",
+      "reason": "PARAM_INT"
+    },
+    {
+      "control": "bool_interval",
+      "reason": "INTERVAL_INT"
+    },
+    {
+      "control": "unknown_field",
+      "reason": "CERT_SCHEMA"
+    },
+    {
+      "control": "float_json",
+      "reason": "JSON_NUMBER"
+    },
+    {
+      "control": "nonfinite_json",
+      "reason": "JSON_NUMBER"
+    },
+    {
+      "control": "duplicate_input",
+      "reason": "JSON_DUPLICATE"
+    },
+    {
+      "control": "duplicate_cert",
+      "reason": "JSON_DUPLICATE"
+    },
+    {
+      "control": "malformed_json",
+      "reason": "JSON_SYNTAX"
+    },
+    {
+      "control": "proxy_norm",
+      "reason": "PROXY_NORM"
+    },
+    {
+      "control": "genuine_bad_center",
+      "reason": "DEFECT_SMALL"
+    }
+  ]
+}

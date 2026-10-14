@@ -1,0 +1,3 @@
+# reference sha256, document sha256, proof filename
+29cd49dddfaaf7104e7b025f07830f900f75633ed9b1aa0199b9ae8e22ee0d87  e290f7dbb148a3cee769914fa29ea1ebdff337eadfe45c3cc21b900c01bcb579  PROOF.md
+552028b08e633bdb618bc68171c60744262a1a4df77079ce0e00f39beb8cdb8b  5af59ce4de0c8149fe0189b8d0b15e7ed2b1c68d20ee258bcc71e59bb8abdf95  STATEMENT.md

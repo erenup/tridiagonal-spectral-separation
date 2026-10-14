@@ -1,0 +1,5 @@
+.lake/
+.audit-build/
+.audit-tests/
+__pycache__/
+*.pyc

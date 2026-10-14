@@ -1,0 +1,226 @@
+{
+  "boundary8": {
+    "diagonal": [
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2"
+    ],
+    "edge_imag": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "edge_real": [
+      "1/4",
+      "1/4",
+      "1/4",
+      "1/4",
+      "1/4",
+      "1/4",
+      "1/4"
+    ],
+    "normalization": "exact absolute row-sum bound \u22641"
+  },
+  "complex2": {
+    "diagonal": [
+      "1/4",
+      "-1/4"
+    ],
+    "edge_imag": [
+      "1/4"
+    ],
+    "edge_real": [
+      "1/4"
+    ],
+    "normalization": "exact absolute row-sum bound \u22641"
+  },
+  "complex3": {
+    "diagonal": [
+      "1/4",
+      "0",
+      "-1/4"
+    ],
+    "edge_imag": [
+      "1/16",
+      "-1/16"
+    ],
+    "edge_real": [
+      "1/8",
+      "1/8"
+    ],
+    "normalization": "exact absolute row-sum bound \u22641"
+  },
+  "fractional_proxy3": {
+    "diagonal": [
+      "1/3",
+      "-1/5",
+      "1/7"
+    ],
+    "edge_imag": [
+      "1/13",
+      "-1/19"
+    ],
+    "edge_real": [
+      "1/11",
+      "1/17"
+    ],
+    "normalization": "exact absolute row-sum bound \u22641"
+  },
+  "repeated4": {
+    "diagonal": [
+      "1/4",
+      "1/4",
+      "-1/4",
+      "-1/4"
+    ],
+    "edge_imag": [
+      "0",
+      "0",
+      "0"
+    ],
+    "edge_real": [
+      "0",
+      "0",
+      "0"
+    ],
+    "normalization": "exact absolute row-sum bound \u22641"
+  },
+  "strong4": {
+    "diagonal": [
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "edge_imag": [
+      "0",
+      "0",
+      "0"
+    ],
+    "edge_real": [
+      "1/2",
+      "1/2",
+      "1/2"
+    ],
+    "normalization": "exact absolute row-sum bound \u22641"
+  },
+  "strong8": {
+    "diagonal": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "edge_imag": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "edge_real": [
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2"
+    ],
+    "normalization": "exact absolute row-sum bound \u22641"
+  },
+  "weak4": {
+    "diagonal": [
+      "0",
+      "0",
+      "1/2",
+      "1/2"
+    ],
+    "edge_imag": [
+      "0",
+      "1/18014398509481984",
+      "0"
+    ],
+    "edge_real": [
+      "1/18014398509481984",
+      "0",
+      "3/18014398509481984"
+    ],
+    "normalization": "exact absolute row-sum bound \u22641"
+  },
+  "zero2": {
+    "diagonal": [
+      "0",
+      "0"
+    ],
+    "edge_imag": [
+      "0"
+    ],
+    "edge_real": [
+      "0"
+    ],
+    "normalization": "exact absolute row-sum bound \u22641"
+  },
+  "zero3": {
+    "diagonal": [
+      "0",
+      "0",
+      "0"
+    ],
+    "edge_imag": [
+      "0",
+      "0"
+    ],
+    "edge_real": [
+      "0",
+      "0"
+    ],
+    "normalization": "exact absolute row-sum bound \u22641"
+  },
+  "zero_edges8": {
+    "diagonal": [
+      "1/4",
+      "-1/4",
+      "1/4",
+      "-1/4",
+      "1/4",
+      "-1/4",
+      "1/4",
+      "-1/4"
+    ],
+    "edge_imag": [
+      "0",
+      "1/16",
+      "1/16",
+      "0",
+      "1/16",
+      "1/16",
+      "0"
+    ],
+    "edge_real": [
+      "0",
+      "1/8",
+      "1/8",
+      "0",
+      "1/8",
+      "1/8",
+      "0"
+    ],
+    "normalization": "exact absolute row-sum bound \u22641"
+  }
+}

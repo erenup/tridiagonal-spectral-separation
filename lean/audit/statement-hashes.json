@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "files": {
+    "KE02/SelectorDefinitions.lean": "dea05f22aab2e8f386a270f3686c5c6ea37cb7de049dde75815dde4928fa72ce",
+    "KE02/SelectorStatement.lean": "881fa9dbde96d85a4109a7a5988a9a60b82127d720edce15d30cb868cc6e1ce9",
+    "KE02/GraeffeDefinitions.lean": "20ed18c09666c56902c70779c25e9b57864e1f16fd8d0810911382aeaf26a910",
+    "KE02/GraeffeStatement.lean": "13854db5232f75331ee54380c7bc782db46226d4696eb6085c9d14f3c93eb99e",
+    "KE02/CoefficientDefinitions.lean": "c57a83be0d91beb4d85ac88db79e2a15298b7cb8da69e8fd8760f11c6fc9e346",
+    "KE02/CoefficientStatement.lean": "1bc613201f9fd907aaf5f8e5430be1d0b7ef9a3231f983b78c0f0674b262777e",
+    "KE02/Statement.lean": "b3d0d608c158b42afb32977c64a1001bfde5356a7d82e2e797956b35bab5a9e7",
+    "FEASIBILITY_SCOPE.md": "204fb57be41dc2f63ed0a0cdaf39f6b3f9a2a175d7305322391ad1772bdaa51c"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "d": 2,
+  "diagonal": [
+    0,
+    0
+  ],
+  "edge_imag": [
+    0
+  ],
+  "edge_real": [
+    0
+  ],
+  "n": 2,
+  "schema": "KE02.input.v1"
+}

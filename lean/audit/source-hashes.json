@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "sources": {
+    "KE02/CoefficientBounds.lean": "5e7dc110b0610ec17e5c8a28cce09c1d79f0b0ad381af0942eb2e39d6ca68468",
+    "KE02/CoefficientDefinitions.lean": "c57a83be0d91beb4d85ac88db79e2a15298b7cb8da69e8fd8760f11c6fc9e346",
+    "KE02/CoefficientExpansion.lean": "3e21c870956e786f145c2b559d93a6a77e1539a7e91b26f975e8cf747c263123",
+    "KE02/CoefficientProof.lean": "f0a2e639298addab5cf9ce4fd466099b0d379c0e0cd6e039f59cfdcee0140a37",
+    "KE02/CoefficientRatios.lean": "262c0c9d154031b51e8a660f0be0d4217ba6d018a8adfbf31b73dfd084e82115",
+    "KE02/CoefficientStatement.lean": "1bc613201f9fd907aaf5f8e5430be1d0b7ef9a3231f983b78c0f0674b262777e",
+    "KE02/GraeffeDefinitions.lean": "20ed18c09666c56902c70779c25e9b57864e1f16fd8d0810911382aeaf26a910",
+    "KE02/GraeffeSplit.lean": "f8b9ecf7ee87c6bc001f6a82a951aa41632db09a87e419266995fbbbf248cc7c",
+    "KE02/GraeffeStatement.lean": "13854db5232f75331ee54380c7bc782db46226d4696eb6085c9d14f3c93eb99e",
+    "KE02/GraeffeUniversal.lean": "4785f1b7f830c05966797c31ec062626a0230762a72895a95513eb3c58daca1f",
+    "KE02/SelectorBounds.lean": "64565bc19992a1a6cd8989d2a8555f18acf15ab82510ab74f278d7cac210a72e",
+    "KE02/SelectorDefinitions.lean": "dea05f22aab2e8f386a270f3686c5c6ea37cb7de049dde75815dde4928fa72ce",
+    "KE02/SelectorGeometry.lean": "115a20febac5e614bfa5df74dc690192bd5c05bff817080642c07e4c4ecdb57c",
+    "KE02/SelectorProof.lean": "da656ff70863e71eff4ca5b8192721ea41cadecaf507e8a119c0bc7ae65c82b5",
+    "KE02/SelectorRecursion.lean": "2553e7d213e7372c489bb002131552e7996b19a6fb9770eda151b5bb92d29edc",
+    "KE02/SelectorStatement.lean": "881fa9dbde96d85a4109a7a5988a9a60b82127d720edce15d30cb868cc6e1ce9",
+    "KE02/Statement.lean": "b3d0d608c158b42afb32977c64a1001bfde5356a7d82e2e797956b35bab5a9e7",
+    "KE02.lean": "ce26d3c5d3fa0da02fc6b704bea492363d3f63ebc30253b984020a2c9f058877"
+  },
+  "configuration": {
+    ".gitignore": "d672342fd6dd985f8c40345c8a768eec1166da8e989eb372a5f09df7b25455e9",
+    "FEASIBILITY_SCOPE.md": "204fb57be41dc2f63ed0a0cdaf39f6b3f9a2a175d7305322391ad1772bdaa51c",
+    "README.md": "69c4df7bafcd3206e165be0b17772ecd7d376a651411afb136833429b1e9f350",
+    "audit/statement-hashes.json": "a1c45b598057d5f3af8317d5ecede220de9a847b4e252d586b9b4d6e2cb844ce",
+    "lake-manifest.json": "cb2a65308c5173ed7c0a4484c5a461fd114129e3dbe7091c1168a10fce38f3ab",
+    "lakefile.toml": "da0828e73768c66a702dddf2198c3d5e59495887e1695c0f3b77a527a48ecdae",
+    "lean-toolchain": "8190e75a201741065fe508b28955dd64dd72d090babe5f70ce6848879d68ae88",
+    "verify.py": "d80b949cd037df788af2ad81d3aeb576d485fa1a9032efead51885d85dcc1af9"
+  }
+}

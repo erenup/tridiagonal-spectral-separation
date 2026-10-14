@@ -1,0 +1,374 @@
+\section{Finite-bit construction and a uniform enclosure certificate}
+\label{sec:finite-bit}
+
+The nearly linear bound in Theorem~\ref{thm:main} concerns exact real
+arithmetic. We now give a separate construction in a finite-information
+model, with an explicit word-size bound and nearly quadratic cost.
+Its geometric input is the small-gap implication already proved in
+Lemma~\ref{lem:defect}; its value oracle uses safeguarded integer
+inertia counts rather than Graeffe transformations.
+
+\subsection{Input model and theorem}
+\label{subsec:finite-model}
+
+Fix integers $n\geq2$ and $d\geq2$, and put $\delta=2^{-d}$.
+All minima in the following definitions are over nonnegative integers:
+\begin{align}
+ a&=\min\{k:2^k\geq4n/\delta\},
+ &\beta&=2^{-a},\label{eq:bit-a}\\
+ K&=\min\{k:2^k\geq16n^3\},
+ &\ell&=\beta4^{-K},\label{eq:bit-K}\\
+ m&=\min\{k:2^k\geq n^2\},
+ &p&=a+2K+20+m,\qquad Q=2^p,\qquad\eta=Q^{-1}.
+ \label{eq:bit-precision}
+\end{align}
+Here $Q$ denotes the grid denominator only in this section.
+Let $T$ be a complex Hermitian tridiagonal matrix with $\norm{T}\leq1$.
+The finite input is $n,d$ and a Hermitian tridiagonal proxy $T_0$:
+each real diagonal entry and each real and imaginary off-diagonal
+component of $T_0$ is an integer multiple of $\eta$, and differs from
+the corresponding component of $T$ by at most $\eta$.
+Only these finite data are given to the algorithm. The entries of
+$T$ need not be rational or separately available to it.
+
+This is an input-enclosure model, not an encoding of arbitrary exact
+real numbers as finite strings. Under the norm promise the input has
+$O(np)$ bits. For rational data, reading and rounding the original
+representation has additional cost, separate from the construction
+bound below.
+
+\begin{theorem}[Finite-bit diagonal regularization]
+\label{thm:finite-bit}
+For every $n,d,T,T_0$ satisfying the preceding hypotheses, a
+deterministic integer algorithm, given $n,d,T_0$, returns a dyadic
+number $c$ and the real diagonal matrix $D=cX$, where
+$X=\diag(1,\ldots,n)$, such that
+\begin{equation}\label{eq:bit-guarantee}
+ 0\leq nc\leq\delta/4,\qquad
+ \gap(T+D)>2^{-100}\frac{\delta^4}{n^{42}}.
+\end{equation}
+It uses
+\begin{equation}\label{eq:bit-cost}
+ O\bigl(n^2p(1+\log n)\bigr)
+ \quad\text{integer operations on $O(p)$-bit integers},
+\end{equation}
+and hence $O(n^2p^3(1+\log n))$ elementary bit operations with
+schoolbook arithmetic, with $O(np)$ bits of workspace. Here
+$p=O(\log(n/\delta))$, and all implicit constants are universal.
+There are no square-root, eigenvalue, unbounded-precision-real or
+exact-real-sign primitives.
+
+The algorithm also returns $O(np)$ bits of certificate data:
+three sets of rational ordered-eigenvalue enclosures for
+$T_0+(c-r)X$, $T_0+cX$ and $T_0+(c+r)X$, where $r=\ell/4$,
+and an explicit rational convex-defect bound. An independent exact
+rational verifier checks these enclosures and the defect inequality.
+The same output and certificate prove~\eqref{eq:bit-guarantee}
+simultaneously for every normalized Hermitian tridiagonal matrix in
+the componentwise $\eta$-enclosure centered at $T_0$.
+The verifier may use longer exact integers; the bounded-word
+construction cost does not assert a bounded-word verification cost.
+\end{theorem}
+
+We prove the theorem in the following subsections. No novelty is
+claimed for safeguarded Sturm counting or bisection. Their role here
+is to give an explicit finite-bit implementation of convex-defect
+selection together with a certificate for an entire input enclosure.
+
+\subsection{Safeguarded integer inertia counts}
+\label{subsec:bit-inertia}
+
+Let $A$ be a Hermitian tridiagonal matrix whose real diagonal and
+real and imaginary edge components lie on the grid $Q^{-1}\mathbb Z$.
+Write its diagonal entries as $A_i/Q$ and its complex edge entries
+as $(B_i+\mathrm i Z_i)/Q$, with integers $A_i,B_i,Z_i$, and set
+$C_i=B_i^2+Z_i^2\geq0$. At a grid shift $x=M/Q$, compute
+\begin{align}
+ D_1&=A_1-M,\label{eq:bit-pivots}\\
+ D_i&=A_i-M-\left\lfloor\frac{C_{i-1}}{D_{i-1}}\right\rfloor
+       \qquad(2\leq i\leq n),\notag
+\end{align}
+replacing every zero pivot by $-1$ immediately after computing it.
+Thus every subsequent division has a nonzero integer denominator.
+The floor is the signed mathematical floor, also for negative
+denominators. Let $\nu$ be the number of negative pivots.
+
+\begin{lemma}\label{lem:bit-count}
+There is a real diagonal matrix $E$ with $\norm{E}\leq\eta$ such that
+$\nu$ is the number of eigenvalues of $A+E$ strictly below $x$, and
+$x$ is not an eigenvalue of $A+E$. Consequently, for every
+$j\in\{1,\ldots,n\}$,
+\begin{equation}\label{eq:bit-safe-decisions}
+ \nu\geq j\ \Longrightarrow\ \lambda_j(A)<x+\eta,
+ \qquad
+ \nu<j\ \Longrightarrow\ \lambda_j(A)>x-\eta.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Put $d_i=D_i/Q$. Before a zero replacement, the diagonal perturbation
+relative to the exact scalar $LDL^*$ recurrence is
+\[
+ e_i=\eta\left(
+       \frac{C_{i-1}}{D_{i-1}}-
+       \left\lfloor\frac{C_{i-1}}{D_{i-1}}\right\rfloor
+       \right)\in[0,\eta)\qquad(i\geq2).
+\]
+Replacing a zero pivot by $-1$ subtracts $\eta$ from this error,
+leaving it in $[-\eta,0)$. The first error is either $0$ or
+$-\eta$. Hence the computed $d_i$ are the exact $LDL^*$ pivots of
+$A+\diag(e_i)-x\Id$. Its unit lower bidiagonal factor is
+nonsingular, and the off-diagonal entries are unchanged. Congruence
+therefore identifies its inertia with the signs of the nonzero
+$d_i$. Their product also proves nonsingularity. This proves the
+first assertion, including zero edges, repeated eigenvalues of $A$
+and complex edge entries. Weyl's inequality and $\norm{E}\leq\eta$
+give~\eqref{eq:bit-safe-decisions}.
+\end{proof}
+
+The auxiliary $E$ may depend on the query $x$. Both decisions in
+\eqref{eq:bit-safe-decisions} concern the same original $A$, so the
+construction does not need these auxiliary perturbations to agree
+across queries.
+
+\subsection{Fixed-grid spectral enclosures and word sizes}
+\label{subsec:bit-bisection}
+
+Suppose $\norm{A}<2$. For each $j=1,\ldots,n$, initialize integer
+endpoints $L=-2Q$ and $U=2Q$. Perform exactly $p$ steps:
+\[
+ M=\left\lfloor\frac{L+U}{2}\right\rfloor,
+ \qquad\text{compute $\nu$ by~\eqref{eq:bit-pivots}},
+\]
+and update
+\begin{equation}\label{eq:bit-bisection}
+ \begin{cases}
+ U\gets\min(U,M+1),&\nu\geq j,\\
+ L\gets\max(L,M-1),&\nu<j.
+ \end{cases}
+\end{equation}
+The strict bracket $L/Q<\lambda_j(A)<U/Q$ is preserved by
+Lemma~\ref{lem:bit-count}. If $w=U-L$, its next value is at most
+$\lceil w/2\rceil+1\leq w/2+3/2$. Since $w_0=4Q$, after $p$
+steps,
+\begin{equation}\label{eq:bit-width}
+ w_p\leq4+3(1-2^{-p})<7.
+\end{equation}
+The output interval thus has width at most $7\eta$, and its
+midpoint has error at most $7\eta/2$. Intervals retain their ordered
+index $j$; no sorting of their midpoints is needed, even with
+repeated eigenvalues.
+
+Each inertia count uses $O(n)$ integer operations, so all $n$
+brackets cost $O(n^2p)$ such operations. In the applications below,
+\begin{equation}\label{eq:bit-entry-bounds}
+ |A_i|\leq2Q,\qquad |B_i|,|Z_i|\leq Q+1,
+ \qquad |M|\leq2Q.
+\end{equation}
+Thus $C_i\leq8Q^2$. Since every denominator has absolute value at
+least one,
+\[
+ \left|\left\lfloor C_i/D_i\right\rfloor\right|
+       \leq8Q^2+1,\qquad |D_i|\leq13Q^2.
+\]
+All recurrence integers have at most $2p+O(1)$ bits. No rational
+numerator or denominator is propagated through this recurrence.
+Addition, multiplication and signed floor division cost $O(p^2)$
+bit operations by elementary algorithms. The spectral-enclosure
+oracle therefore has cost $O(n^2p^3)$ in bit operations and
+$O(np)$ storage.
+
+\subsection{One precision for every adaptive value query}
+\label{subsec:bit-values}
+
+The componentwise input enclosure implies a uniform norm bound.
+Each complex edge error has magnitude at most $2\eta$, so the
+Hermitian error matrix has absolute row sums at most $5\eta$.
+For every admissible $T$ represented by the same proxy,
+\begin{equation}\label{eq:bit-enclosure-norm}
+ \norm{T-T_0}\leq5\eta.
+\end{equation}
+Use the convex function $F(t)=f(T+tX)$ of
+\eqref{eq:X-W-F}, and start the two-child selector at $[0,\beta]$.
+All queried parameters belong to this interval and have dyadic
+denominators dividing $2^{a+2K+2}$, which divides $Q$ by
+\eqref{eq:bit-precision}. The matrices $T_0+tX$ are therefore
+represented exactly on the fixed grid. They satisfy
+\[
+ \norm{T_0+tX}\leq1+5\eta+n\beta<2,
+ \qquad n\beta\leq\delta/4\leq1/16,
+\]
+and their entries obey~\eqref{eq:bit-entry-bounds}. Here $p\geq20$;
+the edge bounds also follow directly from the component enclosure
+and $\norm{T}\leq1$.
+
+At each $t$, form the $n$ spectral brackets from
+Section~\ref{subsec:bit-bisection}, and let $\widehat F(t)$ be the
+sum of their midpoints weighted by $j$. Its error against
+$f(T_0+tX)$ is at most $(7/2)W\eta$, where $W=n(n+1)/2$.
+The Lipschitz bound~\eqref{eq:lipschitz} and
+\eqref{eq:bit-enclosure-norm} imply, simultaneously for every
+admissible $T$,
+\begin{equation}\label{eq:bit-value-error}
+ |\widehat F(t)-F(t)|
+ \leq\frac{17}{2}W\eta
+ \leq9n^2\eta
+ \leq\frac{9\ell}{2^{20}}
+ <\frac{\ell'}{1024}
+ \qquad(\ell'\geq\ell).
+\end{equation}
+We used $n^2\eta\leq\ell/2^{20}$, which follows from the
+definition of $m$. In particular this error allowance holds for
+every child length during all $K$ rounds, with a single precision.
+
+Apply Lemma~\ref{lem:robust-choice}, always choosing the smaller
+computed child potential and resolving ties to the left. The two
+children have the same length, so comparing their potentials amounts
+to comparing the integer numerators of their four-value differences:
+all weighted midpoint sums have the common denominator $2Q$.
+The numerators have $O(p+\log n)=O(p)$ bits. These decisions compare
+explicit finite integers, not the signs of unknown exact spectral
+quantities.
+
+The proof of~\eqref{eq:final-potential} applies to the initial
+interval $[0,\beta]$, since its potential is still less than $n^3$.
+The selected interval has length $\ell$ and center $c$. With
+$r=\ell/4$, Lemma~\ref{lem:children} gives
+\begin{equation}\label{eq:bit-small-defect}
+ \Delta_r F(c):=F(c+r)+F(c-r)-2F(c)<r/8.
+\end{equation}
+Every decision depends only on $T_0$, and the error guarantee
+\eqref{eq:bit-value-error} holds for the entire enclosure. Hence
+the same $c$ satisfies~\eqref{eq:bit-small-defect} for every
+admissible $T$.
+
+The actual matrix $H=T+cX$ has norm at most $1+\delta/4<2$,
+unchanged edge magnitudes at most one, and $0<r<1$. After the
+diagonal phase gauge of Remark~\ref{rem:gauge} when necessary,
+the contrapositive of Lemma~\ref{lem:defect} yields
+$\gap(T+cX)>r^4/(10^{12}n^{14})$. Minimality in
+\eqref{eq:bit-a}--\eqref{eq:bit-K} gives
+$\beta>\delta/(8n)$ and $2^K<32n^3$, so
+\begin{equation}\label{eq:bit-gap-constant}
+ r=\frac{\beta}{4\cdot4^K}>
+       \frac{\delta}{2^{15}n^7},\qquad
+ \frac{r^4}{10^{12}n^{14}}>
+       \frac{\delta^4}{10^{12}2^{60}n^{42}}>
+       2^{-100}\frac{\delta^4}{n^{42}}.
+\end{equation}
+The last strict comparison uses $10^{12}<2^{40}$. The budget
+follows from $0\leq c\leq\beta$ and $n\beta\leq\delta/4$.
+This proves~\eqref{eq:bit-guarantee}.
+
+\subsection{An independently checked certificate for the enclosure}
+\label{subsec:bit-certificate}
+
+Run the spectral-enclosure oracle at the three parameters
+$t_-=c-r$, $t_0=c$ and $t_+=c+r$. Retain brackets
+$[l_j(t),u_j(t)]$ of width at most $7\eta$ for each increasingly
+ordered eigenvalue of $T_0+tX$, and define
+\begin{align}
+ L(t)&=\sum_{j=1}^n j\,l_j(t),&
+ U(t)&=\sum_{j=1}^n j\,u_j(t),\notag\\
+ B&=U(t_+)+U(t_-)-2L(t_0)+20W\eta.
+ \label{eq:bit-certificate-bound}
+\end{align}
+By~\eqref{eq:bit-enclosure-norm}, each $F(t)$ lies between
+$L(t)-5W\eta$ and $U(t)+5W\eta$. Therefore
+$\Delta_rF(c)\leq B$ for every admissible $T$. Each of these
+value intervals has length at most $17W\eta$, whence
+\[
+ 0\leq B-\Delta_rF(c)\leq68W\eta.
+\]
+Using $W\leq n^2$, $n^2\eta\leq4r/2^{20}$ and
+\eqref{eq:bit-small-defect}, we obtain the strict slack
+\begin{equation}\label{eq:bit-certificate-slack}
+ B<\frac r8+\frac{68r}{2^{18}}<\frac r4<\frac r2.
+\end{equation}
+The certificate verifier checks the parameters and budget, the three
+sets of ordered spectral enclosures, and the rational inequality
+$B<r/2$. It recomputes $B$ from those data. Equations
+\eqref{eq:defect-lower}, \eqref{eq:bit-enclosure-norm} and
+\eqref{eq:bit-certificate-bound} then prove the same gap bound
+uniformly throughout the normalized part of the enclosure.
+
+For completeness, the brackets can be verified independently by
+exact rational inertia, without importing the safeguarded constructor.
+To count negative eigenvalues of the Hermitian tridiagonal matrix
+$A-x\Id$, eliminate a nonzero first pivot by its scalar Schur
+complement and add its sign to the inertia. If the first pivot is
+zero and the next edge is zero, remove that isolated zero. If the
+first pivot is zero and the next edge is nonzero, use the leading
+$2\times2$ block. Its determinant is $-|b|^2<0$, so it contributes
+one positive and one negative eigenvalue. The $(2,2)$ entry of its
+inverse is zero, so its Schur complement leaves the next diagonal
+unchanged. Repeating these rules gives the exact count $N_<(x)$ of
+eigenvalues strictly below $x$, including eigenvalue endpoints and
+zero edges. All operations are rational, also for complex rational
+entries, through their real and imaginary components.
+
+For a claimed $j$-th bracket, the verifier requires
+\begin{equation}\label{eq:bit-verifier-brackets}
+ N_<(l_j)<j,\qquad N_<(u_j)\geq j.
+\end{equation}
+These imply $l_j\leq\lambda_j(A)<u_j$. Thus the verified lower
+endpoint is inclusive and the upper endpoint is strict. The brackets
+constructed earlier satisfy the stronger strict lower inequality as
+well. No numerical eigenvalue routine enters this verifier.
+
+There are three pairs of $n$ grid endpoints and a bounded number of
+parameters; with the supplied proxy, their total size is $O(np)$
+bits. The verifier receives the intended proxy separately and checks
+its agreement with the certificate data. A passing certificate is a
+uniform conditional guarantee for every normalized matrix in that
+enclosure. It does not certify that such a matrix exists. Exact
+rational verification can create larger intermediate integers, and
+no bounded-word cost for this independent verifier is asserted.
+
+\subsection{Total cost, supporting checks and scope}
+\label{subsec:bit-cost-scope}
+
+There are at most $8K$ value calls during selection and three further
+calls for certification. Each costs $O(n^2p)$ operations on
+$O(p)$-bit integers. Parameter construction, edge squaring, weighted
+summation and the $n$ diagonal output entries fit within the same
+bound. Since $a=O(d+\log n)$ and $K,m=O(\log n)$,
+$p=O(\log(n/\delta))$. This proves~\eqref{eq:bit-cost} and its
+schoolbook bit-operation bound. The input, the current interval,
+one set of spectral brackets and the final certificate require
+$O(np)$ workspace. These estimates are uniform in $n,d$ and the
+input components, completing the proof of
+Theorem~\ref{thm:finite-bit}.
+
+The accompanying integer constructor and separate rational verifier
+have exact supporting fixtures of orders $2,3,4$ and $8$.
+They include complex edges, repeated entries, zero and weak edges,
+large real couplings, and a dyadic proxy for a nondyadic rational
+matrix. The rational source matrices' norm and enclosure promises
+are checked exactly. Additional cases exercise exact inertia,
+safeguarded-count branches and large-integer serialization.
+Malformed certificates, altered brackets, incorrect defect data and
+input mismatches are required to fail. The registered outputs,
+certificate bytes and reason-specific rejection messages agree in
+ordinary, optimized and alternate hash-seed executions. These finite
+checks support the implementations; the uniform gap, word-size,
+certificate-size and runtime bounds follow from the written proof,
+not from the tested dimensions.
+
+The result is a nearly quadratic finite-bit baseline. It does not
+supply the missing nearly linear finite-precision spectral-value
+oracle, nor provide deterministic regularization for general nonnormal
+eigenproblems. The exact-arithmetic Graeffe evaluator
+in Section~\ref{sec:evaluation} cannot simply be assigned the fixed
+precision used here: its coefficient transformations can have large
+cancellation, unlike the safeguarded recurrence
+\eqref{eq:bit-pivots}. No numerical-stability theorem for a
+floating-point implementation is claimed.
+
+Dyadic budgets lose no qualitative generality. For an arbitrary
+requested real budget $0<\eps<1/2$, a supplied dyadic $\delta$ with
+$\eps/2\leq\delta\leq\eps$ and $\delta\leq1/4$ gives the same
+conclusion with only an absolute-factor change in the gap constant.
+This formulation still requires the finite proxy at the precision
+determined by that supplied dyadic budget; it does not extract bits
+from an arbitrary real input.

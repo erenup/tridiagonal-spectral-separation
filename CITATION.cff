@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "Author information is TBD."
+type: software
+title: "Deterministic diagonal spectral separation in nearly linear arithmetic time"
+repository-code: "https://github.com/erenup/tridiagonal-spectral-separation"
+authors:
+  - family-names: "TBD"
+license: MIT
+abstract: >-
+  A deterministic diagonal perturbation for normalized Hermitian tridiagonal
+  matrices in a specified exact-real arithmetic model, with a separate
+  finite-bit construction, exact certificates and a formal scalar and
+  polynomial core. The manuscript license is TBD.

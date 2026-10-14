@@ -1,0 +1,1149 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype,booktabs,array,xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xurl}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{pdftitle={Deterministic diagonal spectral separation in nearly linear arithmetic time},pdfauthor={TBD}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Id}{\mathrm I}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\gap}{gap}
+\DeclareMathOperator{\rank}{rank}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert_2}
+\title{Deterministic diagonal spectral separation\\in nearly linear arithmetic time}
+\author{TBD}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+For every Hermitian tridiagonal matrix $T$ of order $n\geq2$ with
+$\norm{T}\leq1$ and every $0<\delta<1/2$, we construct deterministically
+a diagonal perturbation $D=t\diag(1,\ldots,n)$, with
+$0\leq t\leq\delta/n$, such that
+$\gap(T+D)>2^{-88}(\delta/n)^{42}$.
+The construction uses $O(n[1+\log(n/\delta)]^3)$ exact real arithmetic
+operations and comparisons, with unit-cost square roots of nonnegative
+reals and no extraction of input bits. This operation bound is not a
+finite-precision guarantee.
+The selection of $t$ uses convexity of a weighted sum of ordered
+eigenvalues. A small tridiagonal spectral gap produces two approximate
+eigenvectors with ordered disjoint supports; swapping their spectral
+weights forces a quantitative convexity defect under the diagonal tilt.
+A two-child interval rule finds a smaller defect after $O(\log n)$
+rounds. Its value approximations are computed by continuant product
+trees and Graeffe root squaring, without a spectral-gap assumption.
+Complex off-diagonal entries, zero edges and repeated eigenvalues are
+all included. For dyadic budgets and dyadic input enclosures, a separate
+integer construction gives a gap greater than $2^{-100}\delta^4/n^{42}$
+in $O(n^2p^3(1+\log n))$ bit operations with $p=O(\log(n/\delta))$.
+It supplies an independently checked rational certificate valid for
+every normalized matrix in the same enclosure.
+\end{abstract}
+
+\section{The main theorem and its context}\label{sec:introduction}
+
+The problem is to separate the spectrum of a Hermitian tridiagonal
+matrix by a small real diagonal perturbation, with a uniform lower
+bound on the resulting gap and nearly linear construction cost.
+For numerical spectral algorithms, this asks whether separation can
+be supplied as a deterministic preliminary step, even when the input
+has repeated eigenvalues. The catalogue question
+\cite{CatalogueKE02} asks for this guarantee in an exact-arithmetic
+model. Theorem~\ref{thm:main} resolves it for every promised input:
+one scalar diagonal tilt suffices, and its coefficient can be chosen
+within the required operation bound. The separate question of
+implementing that fast construction stably at finite precision is
+discussed below; it is not an additional premise of the theorem.
+
+For a Hermitian matrix $H$ of order $n$, write its eigenvalues in
+increasing order, with multiplicity, as
+$\lambda_1(H)\leq\cdots\leq\lambda_n(H)$, and define
+\[
+ \gap(H)=\min_{1\leq j<n}\bigl(\lambda_{j+1}(H)-\lambda_j(H)\bigr).
+\]
+Thus a repeated eigenvalue makes the gap zero. Throughout,
+$\norm{\cdot}$ denotes the Euclidean vector norm or its induced
+operator norm, as appropriate.
+
+\begin{theorem}\label{thm:main}
+There is a deterministic algorithm with the following guarantee.
+For every integer $n\geq2$, every Hermitian tridiagonal matrix
+$T\in\C^{n\times n}$ with $\norm{T}\leq1$, and every real
+$0<\delta<1/2$, the algorithm, given the three diagonals of $T$,
+returns
+\begin{equation}\label{eq:output}
+ D=t\diag(1,\ldots,n),\qquad 0\leq t\leq\delta/n,
+\end{equation}
+with
+\begin{equation}\label{eq:main-gap}
+ \norm{D}\leq\delta,\qquad
+ \gap(T+D)>2^{-88}(\delta/n)^{42}.
+\end{equation}
+Its cost is
+\begin{equation}\label{eq:main-cost}
+ O\bigl(n[1+\log(n/\delta)]^3\bigr)
+\end{equation}
+exact real arithmetic operations and comparisons. Addition,
+subtraction, multiplication, division by a nonzero real number,
+comparison, and the square root of a nonnegative real number each
+have unit cost. The algorithm extracts no bits from exact real inputs.
+All implicit constants are universal.
+\end{theorem}
+
+The input is promised to satisfy the structural and norm assumptions.
+Only the diagonal perturbation is an output; eigenvalues and
+eigenvectors are not required outputs. Complex entries are represented
+by pairs of real numbers, with constant overhead for their arithmetic.
+The construction actually proves the stronger bound
+\begin{equation}\label{eq:strong-gap}
+ \gap(T+D)>
+ \frac{\delta^4}{10^{12}\,4096^4\,n^{42}}.
+\end{equation}
+The constants and powers are chosen for a uniform proof, without an
+optimality assertion.
+
+The operation model is essential. Intermediate values in the
+root-squaring procedure may have extremely large bit lengths. Neither
+\eqref{eq:main-cost} nor its exact-arithmetic proof gives a bit-complexity bound, a
+finite-precision guarantee, or a stable floating-point implementation.
+Square roots are the only nonrational arithmetic primitive used, and
+every such operation is applied to a nonnegative real number. Logarithms
+appear only in cost bounds: all iteration counts are obtained by
+doubling and comparisons. Section~\ref{sec:finite-bit} gives a separate
+finite-information construction with an explicit, nearly quadratic
+bit-complexity bound and a uniform enclosure certificate.
+
+\subsection{Outline of the construction}\label{sec:outline}
+
+Put
+\begin{equation}\label{eq:X-W-F}
+ X=\diag(1,\ldots,n),\qquad W=\frac{n(n+1)}2,\qquad
+ F(t)=\sum_{j=1}^n j\lambda_j(T+tX).
+\end{equation}
+The function $F$ is convex, and its secant slopes lie between $W$
+and $nW$. The interval selection uses only approximate values of this
+single scalar function on $[0,\delta/n]$.
+
+The connection between convexity and separation comes from spatial
+ordering. Two close eigenvalues of a tridiagonal matrix give two unit
+approximate eigenvectors, one supported to the left of a cut and the
+other to its right. Their expectations of $X$ differ by at least one.
+A nearby Hermitian matrix has both vectors as exact eigenvectors at
+the same eigenvalue. Interchanging two consecutive spectral weights
+then forces a centered convexity defect of order the tilt radius.
+
+The interval rule instead finds a center $c$ and radius $r$ with a
+strictly smaller defect, implying that $T+cX$ has no gap below a
+specified multiple of $r^4n^{-14}$. The radius remains larger than
+$\delta/(4096n^7)$. Finally, a gap-independent evaluation procedure
+supplies the needed values of $F$ in nearly linear arithmetic time.
+Sections~\ref{sec:weighted}--\ref{sec:selector} prove the separation
+mechanism; Section~\ref{sec:evaluation} constructs the evaluator;
+Section~\ref{sec:algorithm} assembles the algorithm and its cost.
+
+More explicitly, let $K$ be the least nonnegative integer with
+$2^K\geq16n^3$. Starting from $[0,\delta/n]$, the algorithm makes
+exactly $K=O(\log n)$ two-child interval choices, using at most
+eight approximate values of $F$ per round and choosing the left
+child in a tie. It returns the midpoint $t$ of the final interval.
+The permitted error in each value is specified by the interval
+length, rather than by a spectral-gap hypothesis.
+
+To compute those values, normalize $T+tX$ as in
+Section~\ref{sec:evaluation}, form its shifted characteristic
+polynomial by a balanced tree of continuants, and apply Graeffe
+root squaring. Positive coefficient ratios and successive square
+roots then give approximations to the ordered eigenvalues, including
+multiplicities. Lemma~\ref{lem:spectral-approximation} proves the
+required accuracy without an initial gap. Each value call costs
+$O(n[1+\log(n/\delta)]^2)$ exact operations at the requested
+accuracy; the $O(\log n)$ selection rounds give
+\eqref{eq:main-cost}. This separates the two tasks in the proof:
+the interval rule chooses a good perturbation, and the polynomial
+evaluator supplies its approximate spectral data.
+
+\subsection{Discussion: conditioning and finite precision}
+\label{sec:conditioning-discussion}
+
+The algebraic representation used for evaluation matters to a
+numerical implementation. Graf and Townsend study common algebraic
+reductions for multivariate polynomial systems with finitely many
+simple roots and no roots at infinity
+\cite[Sections~1 and~2.2]{GrafTownsend2024}. Their analysis compares
+the conditioning of a system root with that of intermediate
+univariate polynomials and eigenproblems; specific reductions can
+produce much worse conditioned subproblems
+\cite[Example~3.1 and Section~8]{GrafTownsend2024}. Their results
+concern those multivariate reductions, not the tridiagonal Graeffe
+evaluator here. The relevant perspective is to examine the whole
+chain from matrix entries to polynomial coefficients, transformed
+coefficients, and approximate spectral values, rather than only
+the last root or eigenvalue computation.
+
+For univariate polynomial rootfinding, the distinction between
+matrix and polynomial backward error is also essential.
+Nakatsukasa and Noferini analyze the coefficient perturbations
+induced by perturbed confederate linearizations
+\cite[Section~1 and Section~3]{NakatsukasaNoferini2016};
+Noferini and P\'erez give a related analysis for Chebyshev
+colleague matrices \cite[Corollary~2.8 and Section~3]{NoferiniPerez2017}.
+These results have their own basis, scaling and perturbation
+hypotheses. They do not supply a backward-error analysis for the
+continuant and Graeffe transformations used below.
+
+Here the exact identity~\eqref{eq:graeffe-roots} sends the positive
+root magnitudes $r_j=2+\lambda_j(A)\in[1,3]$ to $r_j^{2^k}$
+after $k$ steps. The coefficients are elementary symmetric
+functions of these powered magnitudes. The operation count charges
+each arithmetic operation once, independently of the size of its
+operands; the intermediate bit lengths can be extremely large.
+Moreover, positivity of the final coefficients does not remove
+the cancellation in their coefficient transformations discussed
+in Section~\ref{subsec:bit-cost-scope}. These observations explain
+the distinction between the exact-operation theorem and a
+finite-precision implementation; they are not a rounding-error
+bound. Malajovich and Zubelli discuss the numerical range of
+classical Graeffe iteration and introduce renormalized coordinates
+\cite[Section~1, pp.~3--7 of the cited preprint]{MalajovichZubelli2001}.
+Their almost-sure convergence result and discussion of rounding
+do not provide the all-input numerical-stability guarantee needed
+for this evaluator.
+
+There is nevertheless a proved finite-bit separation result.
+Theorem~\ref{thm:finite-bit} starts from dyadic component enclosures
+at precision $p=O(\log(n/\delta))$ and uses a different,
+safeguarded integer recurrence. Its constructor uses
+$O(n^2p(1+\log n))$ operations on $O(p)$-bit integers, hence
+$O(n^2p^3(1+\log n))$ schoolbook bit operations. The resulting
+certificate gives the same separation guarantee for every
+normalized matrix in the supplied enclosure, in the precise
+sense of that theorem. This is a nearly quadratic finite-bit
+construction, not a finite-precision analysis of the nearly
+linear Graeffe evaluator. The independent rational verifier may
+use longer intermediate integers.
+
+\paragraph{Open numerical questions.}
+Can the nearly linear value oracle be implemented with controlled
+roundoff through all its representation changes? What scaling or
+renormalization would be needed to retain the absolute value-error
+guarantees required by interval selection, uniformly over inputs
+with zero edges and repeated eigenvalues? Can a nearly linear
+finite-bit construction replace the nearly quadratic one in
+Theorem~\ref{thm:finite-bit}? These questions concern further
+numerical and bit-complexity guarantees. The exact-arithmetic
+separation question itself is settled by Theorem~\ref{thm:main}.
+
+\subsection{Earlier results and the separation question}
+\label{sec:history}
+
+Minami's analysis of the Anderson tight-binding model introduced a
+two-eigenvalue estimate for independent, identically distributed
+diagonal variables with a bounded density \cite{Minami1996}.
+Such estimates control the probability of multiple eigenvalues in a
+short interval. The bounded-density assumption is part of the
+probabilistic statement; Minami's main Poisson-statistics theorem
+also has localization hypotheses.
+This background motivates the deterministic Minami perturbation
+question in the workshop report of Amsel et al.\ \cite[Problem~3.2]{AmselEtAl2026}:
+construct a small separating diagonal perturbation efficiently,
+with nearly linear cost among the proposed targets. The public
+catalogue formulation \cite{CatalogueKE02} specifies the norm
+bounds, uniform quantifiers and exact-operation model used in
+Theorem~\ref{thm:main}. The theorem answers that formulation
+affirmatively.
+
+The catalogue also records explicit partial constructions of Holden
+\cite[Theorems~A and~B, and Section~5]{Holden2026Partial}.
+Writing $T=\diag(d_1,\ldots,d_n)+R$ and
+$\eta=\max_i\sum_{j\ne i}|R_{ij}|$, these cover the regime
+$\eta\leq\delta/[2(n-1)]$, every constant-diagonal tridiagonal
+matrix with equal edge magnitudes, and every matrix of order two.
+The equal-magnitude class permits arbitrary complex edge phases and
+every coupling strength. Theorem~\ref{thm:main} covers all promised
+Hermitian tridiagonal inputs, including those outside these classes.
+
+Randomized regularization has also been studied for general matrices.
+Banks, Garza-Vargas, Kulkarni and Srivastava give polynomial
+eigenvalue-gap and eigenvector-conditioning bounds with high
+probability after a dense complex Gaussian perturbation
+\cite[Theorem~1.4]{BanksEtAl2023}. That perturbation is generally
+non-Hermitian and does not preserve tridiagonal structure. The
+perturbation in~\eqref{eq:output} is real diagonal, and its scalar
+coefficient is chosen deterministically. The broader question of
+deterministic pseudospectral shattering for general non-Hermitian
+matrices remains outside the scope of the present theorem.
+
+The exact arithmetic model agrees with the Real RAM model in
+Sobczyk's analysis of Hermitian eigenproblems
+\cite[Section~1.1]{Sobczyk2025}. For unreduced real symmetric
+tridiagonal matrices, his deterministic diagonalization theorem has
+nearly quadratic arithmetic cost under its specified fast multipole
+assumptions; the eigenvalue-only corollary has nearly linear cost
+under its corresponding assumptions
+\cite[Theorem~1.1 and Corollary~C.1]{Sobczyk2025}.
+Section~5, question~4 of that work asks about deterministic
+pseudospectral shattering. An eigenvalue approximation at a prescribed
+matrix does not itself choose a separating perturbation. The evaluator
+and the selection rule needed here are both constructed below,
+without invoking a fast multipole routine.
+
+The production of spatially separated approximate eigenvectors has
+an inverse-tunneling precedent in Klopp's study of one-dimensional
+Schr\"odinger operators
+\cite[Section~1.2 and Theorem~2.1]{Klopp2014}.
+Klopp's deterministic splitting theorem concerns a continuum
+Dirichlet problem. Section~\ref{sec:quasimodes} proves directly the
+finite-dimensional statement needed here, with explicit constants
+and with zero edges allowed. The evaluator uses the tridiagonal
+continuant recurrence, classical Graeffe root squaring
+\cite[Section~1]{MalajovichZubelli2001}, and the
+radix-two Fourier transform \cite{CooleyTukey1965}; the relevant
+identities and operation bounds are proved in
+Section~\ref{sec:evaluation}. These comparisons are confined to
+the cited sources and formulations.
+
+\section{A convex weighted spectral function}\label{sec:weighted}
+
+For a Hermitian matrix $A$ of order $n$, set
+\[
+ f(A)=\sum_{j=1}^n j\lambda_j(A),
+ \qquad \mathcal U_X=\{UXU^*:U\text{ unitary}\}.
+\]
+The weights increase with the eigenvalue ordering.
+
+\begin{lemma}\label{lem:variational}
+For every Hermitian $A$,
+\begin{equation}\label{eq:variational}
+ f(A)=\max_{G\in\mathcal U_X}\tr(GA).
+\end{equation}
+For Hermitian $A,B$,
+\begin{equation}\label{eq:lipschitz}
+ |f(A)-f(B)|\leq W\norm{A-B}\leq n^2\norm{A-B}.
+\end{equation}
+The function $F(t)=f(T+tX)$ is convex and satisfies
+\begin{equation}\label{eq:slopes}
+ W\leq\frac{F(t)-F(s)}{t-s}\leq nW\qquad(s<t).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+If $P$ is an orthogonal projection of rank $k$, diagonalization of $A$
+gives
+\[
+ \tr(PA)=\sum_{i=1}^n p_i\lambda_i(A),\qquad
+ 0\leq p_i\leq1,\quad \sum_i p_i=k.
+\]
+The last sum is maximized by assigning weight one to the $k$ largest
+eigenvalues. For example, move mass from any smaller eigenvalue to
+an incompletely weighted larger one; the objective cannot decrease.
+The spectral projection onto the largest $k$ eigenvalues attains
+equality, including when the boundary eigenvalue has multiplicity.
+Consequently
+\[
+ \max_{\rank P=k}\tr(PA)=\sum_{i=n-k+1}^n\lambda_i(A).
+\]
+Summing these identities over $k=1,\ldots,n$ counts
+$\lambda_j(A)$ exactly $j$ times. The maximizing projections can all
+be chosen from a single increasing eigenbasis. Their sum has
+eigenvalues $1,\ldots,n$, so it belongs to $\mathcal U_X$.
+Conversely every $G\in\mathcal U_X$ is the sum of its nested spectral
+projections corresponding to the largest $k$ weights. Applying the
+projection inequality to these projections proves
+\eqref{eq:variational} in both directions.
+
+Every $G\in\mathcal U_X$ is positive definite and has trace $W$.
+If $\eta=\norm{A-B}$, then
+$-\eta\Id\preceq A-B\preceq\eta\Id$, whence
+$|\tr(G(A-B))|\leq W\eta$.
+Taking maxima in~\eqref{eq:variational} in either order proves
+\eqref{eq:lipschitz}. The same formula expresses $F$ as a maximum
+of affine functions of $t$, proving convexity. Finally
+$\Id\preceq X\preceq n\Id$ implies
+$W\leq\tr(GX)\leq nW$ for every such $G$.
+Comparing the affine maxima at $s$ and $t$ gives~\eqref{eq:slopes}.
+\end{proof}
+
+\begin{remark}[Reduction to real eigenvectors]\label{rem:gauge}
+A diagonal unitary conjugation turns any Hermitian tridiagonal matrix
+into a real symmetric tridiagonal matrix with nonnegative edges.
+On each connected component of its nonzero edges, start with one
+unit complex phase and choose successive phases to make each conjugated
+edge real and nonnegative. At a zero edge, start a new component.
+This conjugation commutes with $X$ and with every real diagonal
+perturbation. It therefore leaves all quantities used in the separation
+argument unchanged. The argument below may use real eigenvectors.
+The algorithm itself does not construct these phases: its determinant
+recurrence uses only squared edge magnitudes.
+\end{remark}
+
+\section{Quasimodes with ordered disjoint supports}\label{sec:quasimodes}
+
+Here a unit vector $a$ is an approximate eigenvector at energy $E$,
+with residual at most $\zeta$, if $\norm{(H-E\Id)a}\leq\zeta$.
+The residual is always measured in the full matrix, including entries
+on the opposite side of any support cut.
+
+\begin{lemma}\label{lem:quasimodes}
+Let $H$ be a real symmetric tridiagonal matrix of order $n\geq2$,
+with $\norm{H}\leq2$ and edge magnitudes at most one. Suppose it has
+orthonormal real eigenvectors $u,v$ with eigenvalues $\lambda,\mu$
+satisfying $|\mu-\lambda|\leq h$, where
+\begin{equation}\label{eq:h-range}
+ 0<h\leq\frac1{256n^6}.
+\end{equation}
+Set $E=(\lambda+\mu)/2$ and
+\begin{equation}\label{eq:tau}
+ \tau=(16n^2h)^{1/4}.
+\end{equation}
+There are a cut $1\leq k<n$ and real unit vectors $a,b$, supported
+respectively in $\{1,\ldots,k\}$ and $\{k+1,\ldots,n\}$, such that
+\begin{equation}\label{eq:quasimode-bounds}
+ \norm{(H-E\Id)a}\leq2n\tau,\qquad
+ \norm{(H-E\Id)b}\leq2n\tau.
+\end{equation}
+They are orthogonal, and
+\begin{equation}\label{eq:ordered-expectation}
+ b^{\mathsf T}Xb-a^{\mathsf T}Xa\geq1.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Write $r_i=(u_i,v_i)\in\R^{1\times2}$ and $\rho_i=\norm{r_i}$.
+For the $n\times2$ matrix $U=(u\ v)$, orthonormality says
+\begin{equation}\label{eq:row-identity}
+ \sum_{i=1}^n r_i^{\mathsf T}r_i=U^{\mathsf T}U=\Id_2.
+\end{equation}
+In particular $\rho_i\leq1$. The Cauchy--Binet formula applied to
+\eqref{eq:row-identity} gives
+\[
+ \sum_{s<t}\det\begin{pmatrix}r_s\\r_t\end{pmatrix}^{\!2}=1.
+\]
+There are fewer than $n^2$ terms, so choose $s<t$ with
+\begin{equation}\label{eq:endpoint-det}
+ \left|\det\begin{pmatrix}r_s\\r_t\end{pmatrix}\right|\geq\frac1n.
+\end{equation}
+Since each row norm is at most one, both $\rho_s$ and $\rho_t$
+are at least $1/n$.
+
+Let $d_i$ and $\beta_i$ be the diagonal and edge entries of $H$,
+and set $\beta_0=\beta_n=0$. Multiplying the recurrence for $v$
+by $u_i$, subtracting the recurrence for $u$ multiplied by $v_i$,
+and summing from $1$ to $i$ gives the discrete Wronskian identity
+\begin{equation}\label{eq:wronskian}
+ \beta_i\det\begin{pmatrix}r_i\\r_{i+1}\end{pmatrix}
+   =(\mu-\lambda)\sum_{j=1}^i u_jv_j.
+\end{equation}
+Cauchy--Schwarz bounds the partial inner product by one. Hence the
+absolute value of the left side is at most $h$.
+The two recurrences also give the row equation
+\begin{equation}\label{eq:row-recurrence}
+ \beta_{i-1}r_{i-1}+(d_i-E)r_i+\beta_ir_{i+1}=e_i,
+ \qquad
+ e_i=((\lambda-E)u_i,(\mu-E)v_i),
+\end{equation}
+where $\norm{e_i}\leq h\rho_i/2$.
+
+We claim that some $s\leq k<t$ satisfies either
+\begin{equation}\label{eq:cut-alternatives}
+ |\beta_k|\leq\tau,
+ \qquad\text{or}\qquad
+ \rho_k\leq\tau\ \text{and}\ \rho_{k+1}\leq\tau.
+\end{equation}
+Suppose to the contrary that neither alternative occurs. Then all
+edges between $s$ and $t$ have magnitude greater than $\tau$,
+and no two consecutive rows there both have norm at most $\tau$.
+The bound~\eqref{eq:h-range} gives
+\begin{equation}\label{eq:tau-small}
+ \tau\leq\frac1{2n}\leq1,
+\end{equation}
+so both endpoint rows have norm greater than $\tau$.
+List, in order, the rows in $[s,t]$ whose norms exceed $\tau$.
+The first and last are $s,t$, and successive indices differ by
+one or two.
+
+For any nonzero row $r$, let
+$P_r=r^{\mathsf T}r/\norm{r}^2$ be its direction projection.
+For nonzero rows $r,q$ in two dimensions,
+\begin{equation}\label{eq:projector-distance}
+ \norm{P_r-P_q}=
+ \frac{\left|\det\begin{pmatrix}r\\q\end{pmatrix}\right|}
+      {\norm{r}\norm{q}}.
+\end{equation}
+To verify this, rotate the first unit row to $(1,0)$ and write the
+second as $(c,s)$ with $c^2+s^2=1$. The projection difference has
+trace zero and determinant $-s^2$, so its eigenvalues are $\pm|s|$.
+Both sides of~\eqref{eq:projector-distance} are unchanged by the rotation.
+
+For adjacent large rows,~\eqref{eq:wronskian} and the edge lower
+bound give direction distance at most $h/\tau^3\leq h/\tau^4$.
+If two successive large rows are $i-1$ and $i+1$, take the determinant
+of~\eqref{eq:row-recurrence} with $r_{i-1}$. Using
+$|d_i-E|\leq4$, the Wronskian on the preceding edge, and
+$\rho_i,\rho_{i-1}\leq1$, we obtain
+\begin{align}
+ \left|\det\begin{pmatrix}r_{i-1}\\r_{i+1}\end{pmatrix}\right|
+ &\leq\frac{4h}{|\beta_{i-1}\beta_i|}
+       +\frac{h}{2|\beta_i|}\notag\\
+ &\leq\frac{4h}{\tau^2}+\frac{h}{2\tau}
+ \leq\frac{5h}{\tau^2}.
+ \label{eq:skipped-row}
+\end{align}
+Dividing by the two large row norms bounds their direction distance
+by $5h/\tau^4$.
+There are at most $n-1$ steps in the list. The triangle inequality
+therefore yields
+\[
+ \norm{P_{r_s}-P_{r_t}}\leq\frac{5nh}{\tau^4}
+       =\frac5{16n}<\frac1n.
+\]
+But~\eqref{eq:endpoint-det},~\eqref{eq:projector-distance} and
+$\rho_s,\rho_t\leq1$ give the opposite lower bound $1/n$.
+This contradiction proves~\eqref{eq:cut-alternatives}.
+
+It remains to turn the cut into full-matrix residual bounds. Choose
+$c=r_s^{\mathsf T}/\rho_s\in\R^2$ and set $w=Uc$.
+Then $\norm{w}=1$, $w_s=\rho_s\geq1/n$, and
+$\norm{(H-E\Id)w}\leq h/2$.
+Let $Q_L$ be the coordinate projection onto $\{1,\ldots,k\}$.
+The commutator $[H,Q_L]w=HQ_Lw-Q_LHw$ has only two possibly
+nonzero coordinates:
+\begin{equation}\label{eq:leakage}
+ ([H,Q_L]w)_k=-\beta_kw_{k+1},\qquad
+ ([H,Q_L]w)_{k+1}=\beta_kw_k.
+\end{equation}
+At a weak edge its norm is at most $\tau$, since $\norm{w}=1$.
+Under the second alternative in~\eqref{eq:cut-alternatives},
+$|w_i|=|r_ic|\leq\rho_i$ and $|\beta_k|\leq1$, giving the bound
+$\sqrt2\tau$. Thus
+\[
+ \norm{(H-E\Id)Q_Lw}
+ \leq\norm{Q_L(H-E\Id)w}+\norm{[H,Q_L]w}
+ \leq\frac h2+\sqrt2\tau.
+\]
+Because $s\leq k$, the truncated norm is at least $1/n$.
+Normalize $Q_Lw$ to obtain $a$. The same construction from
+$c=r_t^{\mathsf T}/\rho_t$ and the right projection gives $b$.
+Here $h\leq\tau$: indeed $h<1$ and $\tau^4=16n^2h\geq h^4$.
+Since $1/2+\sqrt2<2$, both normalized residuals are at most
+$2n\tau$, proving~\eqref{eq:quasimode-bounds}.
+The two supports are disjoint, so $a,b$ are orthogonal. Their unit
+norms and their ordered supports give
+$a^{\mathsf T}Xa\leq k$ and $b^{\mathsf T}Xb\geq k+1$,
+which proves~\eqref{eq:ordered-expectation}.
+\end{proof}
+
+\section{Small gaps force a convexity defect}\label{sec:defect}
+
+\begin{lemma}\label{lem:defect}
+Let $H$ be real symmetric tridiagonal of order $n\geq2$, with
+$\norm{H}\leq2$ and
+edge magnitudes at most one. For $0<r\leq1$, define
+\begin{equation}\label{eq:h-r}
+ h_r=\frac{r^4}{10^{12}n^{14}}.
+\end{equation}
+If $\gap(H)\leq h_r$, then
+\begin{equation}\label{eq:defect-lower}
+ f(H+rX)+f(H-rX)-2f(H)\geq r/2.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The positive number $h=h_r$ satisfies~\eqref{eq:h-range}, since
+$256r^4\leq10^{12}n^8$.
+Choose orthonormal eigenvectors for a pair of adjacent eigenvalues
+attaining the minimum gap. Lemma~\ref{lem:quasimodes} supplies an
+energy $E$ and orthonormal vectors $a,b$ with residual bound
+$\zeta=2n\tau$, where $\tau=(16n^2h)^{1/4}$.
+Let
+\begin{equation}\label{eq:flattening}
+ Q=aa^{\mathsf T}+bb^{\mathsf T},\qquad
+ H'=(\Id-Q)H(\Id-Q)+EQ.
+\end{equation}
+Both $a$ and $b$ are eigenvectors of $H'$ with eigenvalue $E$.
+For $x=\alpha a+\beta b$ of unit norm, the residual triangle
+inequality and Cauchy--Schwarz give
+$\norm{(H-E\Id)x}\leq\sqrt2\zeta$.
+Thus $\norm{(H-E\Id)Q}\leq\sqrt2\zeta$.
+Expanding~\eqref{eq:flattening} gives
+\[
+ H-H'=Q(H-E\Id)+(H-E\Id)Q-Q(H-E\Id)Q.
+\]
+Since $H-E\Id$ is symmetric and $Q$ is an orthogonal projection,
+each term has norm at most $\sqrt2\zeta$. Consequently
+\begin{equation}\label{eq:nearby-bound}
+ \norm{H-H'}\leq3\sqrt2\zeta\leq5\zeta.
+\end{equation}
+
+Choose an increasing orthonormal eigenbasis of $H'$ containing
+$a,b$. The indices for the repeated eigenvalue $E$ form a consecutive
+block of length at least two. Assign two consecutive weights in
+$\{1,\ldots,n\}$ within that block to $a,b$, leaving every other
+weight fixed. Both assignments maximize~\eqref{eq:variational}
+at $H'$. Denote them by $G_+,G_-\in\mathcal U_X$, choosing the
+orientation so that
+\begin{equation}\label{eq:weight-swap}
+ G_+-G_-=bb^{\mathsf T}-aa^{\mathsf T},\qquad
+ \tr((G_+-G_-)X)=b^{\mathsf T}Xb-a^{\mathsf T}Xa\geq1.
+\end{equation}
+Using $G_+$ at $H'+rX$ and $G_-$ at $H'-rX$ in the variational
+formula gives
+\begin{align*}
+ f(H'+rX)+f(H'-rX)-2f(H')
+ &\geq r\tr((G_+-G_-)X)\\
+ &\geq r.
+\end{align*}
+Transfer each of the three function terms from $H'$ to $H$ using
+\eqref{eq:lipschitz}; the middle term has coefficient two. The total
+loss is at most
+\[
+ 4n^2\norm{H-H'}\leq20n^2\zeta=40n^3\tau.
+\]
+By~\eqref{eq:h-r},
+\begin{equation}\label{eq:defect-constant}
+ \left(\frac{80n^3\tau}{r}\right)^4
+     =\frac{80^4\cdot16}{10^{12}}<1.
+\end{equation}
+Thus the loss is strictly less than $r/2$, which proves
+\eqref{eq:defect-lower}.
+\end{proof}
+
+\begin{remark}\label{rem:repeated}
+The proof also applies when the minimum gap is zero. The positive
+quantity supplied to Lemma~\ref{lem:quasimodes} is $h_r$, and no
+step divides by the actual gap. The matrix $H'$ need not be
+tridiagonal; only its Hermitian spectral variational formula and its
+distance from $H$ are used.
+\end{remark}
+
+\section{A robust two-child interval rule}\label{sec:selector}
+
+For a convex real function $F$ on an interval, write
+\[
+ S(u,v)=\frac{F(v)-F(u)}{v-u}\qquad(u<v).
+\]
+Convexity implies that secant slopes are nondecreasing as either
+endpoint moves to the right. For disjoint intervals ordered from
+left to right, every secant on the first has slope at most every
+secant on the second. These facts follow directly by expressing an
+intermediate point as a convex combination of two endpoints.
+
+For $I=[a,b]$ of positive length $L=b-a$, define
+\begin{equation}\label{eq:potential}
+ P(I)=S(b-L/4,b)-S(a,a+L/4).
+\end{equation}
+It is nonnegative. For the particular $F$ in~\eqref{eq:X-W-F},
+the slope bounds~\eqref{eq:slopes} give
+\begin{equation}\label{eq:initial-potential}
+ 0\leq P(I)\leq(n-1)W<n^3.
+\end{equation}
+
+\begin{lemma}\label{lem:children}
+The two children
+\begin{equation}\label{eq:children}
+ I_{\mathrm L}=[a+L/4,a+L/2],\qquad
+ I_{\mathrm R}=[a+L/2,a+3L/4]
+\end{equation}
+satisfy
+\begin{equation}\label{eq:potential-sum}
+ P(I_{\mathrm L})+P(I_{\mathrm R})\leq P(I).
+\end{equation}
+If $c=(a+b)/2$ and $r=L/4$, then
+\begin{equation}\label{eq:defect-potential}
+ \frac{F(c+r)+F(c-r)-2F(c)}r\leq P(I).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The four secants defining the two child potentials, in spatial order,
+have endpoints
+\[
+ [a+4L/16,a+5L/16],\quad [a+7L/16,a+8L/16],
+\]
+\[
+ [a+8L/16,a+9L/16],\quad [a+11L/16,a+12L/16].
+\]
+Let their slopes be $s_1\leq s_2\leq s_3\leq s_4$.
+The sum of child potentials is
+\[
+ (s_2-s_1)+(s_4-s_3)
+       =(s_4-s_1)-(s_3-s_2)\leq s_4-s_1.
+\]
+The parent left secant lies to the left of all four child secants,
+and the parent right secant lies to their right. Thus
+$s_4-s_1\leq P(I)$, proving~\eqref{eq:potential-sum}.
+For~\eqref{eq:defect-potential}, its left side equals
+$S(c,c+r)-S(c-r,c)$.
+The parent right slope bounds the first from above, and the parent
+left slope bounds the second from below.
+\end{proof}
+
+\begin{lemma}[Selection from approximate values]\label{lem:robust-choice}
+Suppose that for each child $J=[u,v]$ of length $\ell=L/4$, values
+of $F$ at
+$u,u+\ell/4,v-\ell/4,v$ are supplied with absolute error at most
+$\ell/1024$. Let $\widehat P(J)$ be the resulting approximation
+to~\eqref{eq:potential}. Choose the child of smaller
+$\widehat P$, breaking ties to the left. Then
+\begin{equation}\label{eq:recurrence}
+ P(I_{\mathrm{next}})\leq\frac{P(I)}2+\frac1{32}.
+\end{equation}
+At most eight values of $F$ are needed.
+\end{lemma}
+
+\begin{proof}
+Each of the four value errors enters a numerator with coefficient
+of absolute value one, and the secant denominator is $\ell/4$.
+Hence
+\[
+ |\widehat P(J)-P(J)|\leq
+       \frac{4(\ell/1024)}{\ell/4}=\frac1{64}.
+\]
+Let $J_*$ be a child of smallest true potential. The selected child
+$J$ obeys
+\[
+ P(J)\leq\widehat P(J)+\frac1{64}
+ \leq\widehat P(J_*)+\frac1{64}
+ \leq P(J_*)+\frac1{32}
+ \leq\frac{P(I)}2+\frac1{32},
+\]
+where the last inequality uses~\eqref{eq:potential-sum}.
+The signs of the four errors are arbitrary, and no consistency
+between errors at different queries is assumed.
+\end{proof}
+
+\begin{proposition}\label{prop:selector}
+Start from $I_0=[0,\delta/n]$. Let $K$ be the least nonnegative
+integer such that $2^K\geq16n^3$, and apply
+Lemma~\ref{lem:robust-choice} exactly $K$ times to
+$F(t)=f(T+tX)$, obtaining nested intervals $I_0,\ldots,I_K$.
+If $c$ is the midpoint of $I_K$, then $D=cX$ satisfies
+\eqref{eq:output} and~\eqref{eq:strong-gap}.
+\end{proposition}
+
+\begin{proof}
+The recurrence gives, by induction,
+\begin{equation}\label{eq:final-potential}
+ P(I_K)\leq2^{-K}P(I_0)+\frac1{16}(1-2^{-K})<\frac18.
+\end{equation}
+Here $P(I_0)<n^3$ and $2^K\geq16n^3$ make the first term
+strictly less than $1/16$, and the second is also less than $1/16$.
+Each child has a quarter of its parent's length. With
+$r=|I_K|/4$, minimality of $K$ implies $2^K<32n^3$ and hence
+\begin{equation}\label{eq:radius}
+ |I_K|=\frac{\delta}{n4^K}>
+       \frac{\delta}{1024n^7},\qquad
+ r=\frac{\delta}{4n4^K}>
+       \frac{\delta}{4096n^7}.
+\end{equation}
+Lemma~\ref{lem:children} and~\eqref{eq:final-potential} give
+\begin{equation}\label{eq:small-defect}
+ f(T+(c+r)X)+f(T+(c-r)X)-2f(T+cX)<r/8.
+\end{equation}
+All query points and $c-r,c,c+r$ belong to $[0,\delta/n]$.
+Thus $H=T+cX$ has norm at most $1+\delta<3/2$, its edge
+magnitudes are at most one, and $0<r<1$.
+Apply the real gauge of Remark~\ref{rem:gauge} if necessary.
+The contrapositive of Lemma~\ref{lem:defect}, together with
+\eqref{eq:small-defect}, gives
+\[
+ \gap(T+cX)>\frac{r^4}{10^{12}n^{14}}
+      >\frac{\delta^4}{10^{12}\,4096^4\,n^{42}}.
+\]
+The midpoint satisfies $0\leq c\leq\delta/n$, so
+$\norm{cX}=nc\leq\delta$.
+\end{proof}
+
+\section{Nearly linear evaluation in the exact arithmetic model}
+\label{sec:evaluation}
+
+We now construct every approximate value required by the selection.
+No spectral separation is assumed in this section. In particular,
+this evaluation procedure does not presuppose the conclusion of
+Theorem~\ref{thm:main}.
+
+\subsection{Polynomial multiplication using permitted operations}
+
+\begin{lemma}\label{lem:multiply}
+For every integer $m\geq0$, two polynomials of degrees at most $m$
+can be multiplied using
+$O((m+1)[1+\log(m+1)])$ permitted exact operations.
+All algebraic constants needed for these operations can be constructed
+from rational numbers using nonnegative square roots.
+\end{lemma}
+
+\begin{proof}
+Choose a power of two $N\geq2m+1$ with $N=O(m+1)$, using
+doubling and comparisons. For $N\geq4$, its primitive root of
+unity is obtained by repeated angle halving starting with
+$i=(0,1)$, viewed as a pair of reals. If $\cos\theta$ is known
+for $0<\theta\leq\pi/2$, the next root has real and imaginary
+parts
+\begin{equation}\label{eq:half-angle}
+ \cos(\theta/2)=\sqrt{\frac{1+\cos\theta}{2}},\qquad
+ \sin(\theta/2)=\sqrt{\frac{1-\cos\theta}{2}}.
+\end{equation}
+All radicands are nonnegative, and the positive signs select the
+first quadrant. For lengths one and two, the roots $1$ and $-1$
+are rational. Thus no trigonometric evaluation is an operation in
+the algorithm;~\eqref{eq:half-angle} only proves the identity of
+the constants constructed by square roots. Repeated multiplication
+generates all powers of the chosen root $\omega$ in $O(N)$ work.
+
+For a coefficient vector of length $N$, its transform is
+$\widehat a_k=\sum_{j=0}^{N-1}a_j\omega^{jk}$.
+Splitting the sum into even and odd indices gives two transforms
+of length $N/2$, followed by $O(N)$ additions and multiplications.
+The recurrence has $\log_2N$ levels and total cost $O(N\log N)$.
+The inverse uses $\omega^{-1}=\overline\omega$ and division by
+$N$. Its correctness follows from the finite geometric-sum identity
+\[
+ \sum_{k=0}^{N-1}\omega^{k(j-\ell)}
+ =\begin{cases}N,&j=\ell\pmod N,\\0,&j\ne\ell\pmod N.
+ \end{cases}
+\]
+Transform both padded coefficient vectors, multiply pointwise, and
+apply the inverse transform. The resulting cyclic convolution equals
+the ordinary product because $N\geq2m+1$.
+Complex intermediate arithmetic uses a constant number of real
+operations. The exact output coefficients are real whenever the
+input coefficients are real.
+\end{proof}
+
+\subsection{Continuants and balanced product trees}
+
+Let $A$ be Hermitian tridiagonal with $\norm{A}\leq1$. Write its
+diagonal as $a_i\in\R$ and its squared edge magnitudes as
+$c_i=|A_{i,i+1}|^2\geq0$, with $c_0=0$. The leading principal
+determinants of $z\Id+2\Id+A$ obey
+\begin{equation}\label{eq:continuants}
+ P_{-1}(z)=0,\quad P_0(z)=1,\quad
+ P_i(z)=(z+2+a_i)P_{i-1}(z)-c_{i-1}P_{i-2}(z).
+\end{equation}
+This follows by expansion at the last row of a tridiagonal
+determinant: the adjacent off-diagonal entries occur only through
+their product $|A_{i-1,i}|^2$.
+
+Set
+\[
+ B_i(z)=\begin{pmatrix}z+2+a_i&-c_{i-1}\\1&0\end{pmatrix}.
+\]
+Then
+\begin{equation}\label{eq:continuant-product}
+ \begin{pmatrix}P_n\\P_{n-1}\end{pmatrix}
+ =B_n\cdots B_1\begin{pmatrix}1\\0\end{pmatrix}.
+\end{equation}
+Form this ordered matrix product by a balanced binary tree, combining
+the product for the later block on the left of the earlier block.
+Each matrix multiplication uses a constant number of polynomial
+multiplications and additions. A block of $s$ consecutive factors
+has entries of degree at most $s$.
+At level $j$, the blocks have length at most $2^j$, there are
+$O(n/2^j)$ blocks, and Lemma~\ref{lem:multiply} bounds the work
+by $O(n(j+1))$. One may pad to a power of two with identity matrices;
+the padded length is less than $2n$ and does not affect this bound.
+Summing over levels proves the cost
+\begin{equation}\label{eq:continuant-cost}
+ O\bigl(n[1+\log n]^2\bigr).
+\end{equation}
+
+The resulting monic polynomial is
+\begin{equation}\label{eq:positive-roots}
+ P(z)=P_n(z)=\det(z\Id+2\Id+A)=\prod_{j=1}^n(z+r_j),
+ \qquad r_j=2+\lambda_j(A)\in[1,3].
+\end{equation}
+In particular, every coefficient is strictly positive.
+
+\subsection{Graeffe squaring and coefficient ratios}
+
+Write a polynomial as $P(z)=E(z^2)+zO(z^2)$ by separating its
+even and odd coefficients. Define
+\begin{equation}\label{eq:graeffe}
+ \mathcal G(P)(z)=E(-z)^2+zO(-z)^2.
+\end{equation}
+If $P(z)=\prod_j(z+r_j)$, then
+\begin{equation}\label{eq:graeffe-roots}
+ \mathcal G(P)(z)=\prod_{j=1}^n(z+r_j^2).
+\end{equation}
+Indeed,
+$P(w)P(-w)=E(w^2)^2-w^2O(w^2)^2
+ =\prod_j(r_j^2-w^2)$;
+substituting $w^2=-z$ proves the polynomial identity, with the sign
+in~\eqref{eq:graeffe} included.
+Lemma~\ref{lem:multiply} evaluates one transform in
+$O(n[1+\log n])$ operations. After $k$ transforms the roots are
+$-r_j^R$, where $R=2^k$; the degree remains $n$.
+
+For the following estimates, reorder the positive numbers decreasingly,
+so $r_1\geq\cdots\geq r_n$. If
+\[
+ \mathcal G^k(P)(z)=z^n+e_1z^{n-1}+\cdots+e_n,
+ \qquad e_0=1,
+\]
+then $e_j$ is the $j$th elementary symmetric function of
+$r_1^R,\ldots,r_n^R$. Put $p_0=1$ and
+$p_j=\prod_{i=1}^j r_i^R$.
+The product of the $j$ largest entries is one term in $e_j$, and
+every other term is at most that product. Positivity therefore gives
+\begin{equation}\label{eq:coefficient-bounds}
+ p_j\leq e_j\leq\binom nj p_j\leq2^np_j.
+\end{equation}
+Dividing an upper bound by a lower bound, and then a lower bound
+by an upper bound, yields
+\[
+ 2^{-n}r_j^R\leq\frac{e_j}{e_{j-1}}\leq2^nr_j^R.
+\]
+Thus the quantities
+\begin{equation}\label{eq:root-estimates}
+ q_j=\left(\frac{e_j}{e_{j-1}}\right)^{1/R}
+\end{equation}
+satisfy
+\begin{equation}\label{eq:root-ratio-bounds}
+ r_j2^{-n/R}\leq q_j\leq r_j2^{n/R}.
+\end{equation}
+The denominators are strictly positive, and each $q_j$ is computed
+by exactly $k$ successive nonnegative square roots of its positive
+ratio. Formula~\eqref{eq:root-estimates} therefore invokes no general
+root-extraction operation.
+
+\begin{lemma}\label{lem:spectral-approximation}
+Given Hermitian tridiagonal $A$ with $\norm{A}\leq1$ and
+$0<\eps<1$, the preceding construction deterministically returns
+nondecreasing real numbers $\widetilde\lambda_1,\ldots,
+\widetilde\lambda_n$ with
+\begin{equation}\label{eq:spectral-accuracy}
+ |\widetilde\lambda_j-\lambda_j(A)|\leq\eps/2
+ \qquad(1\leq j\leq n)
+\end{equation}
+in $O(n[1+\log(n/\eps)]^2)$ permitted operations and comparisons.
+No simplicity or spectral-gap hypothesis is needed.
+\end{lemma}
+
+\begin{proof}
+Choose $k$ by doubling until $R=2^k\geq6n/\eps$.
+For $0\leq x\leq1$, convexity of $2^x$ bounds it by the chord
+joining $(0,1)$ and $(1,2)$, so $2^x\leq1+x$.
+Reciprocation also gives
+$2^{-x}\geq1/(1+x)\geq1-x$.
+Take $x=n/R\leq\eps/6<1$ in~\eqref{eq:root-ratio-bounds}.
+Since $r_j\leq3$,
+\begin{equation}\label{eq:q-error}
+ |q_j-r_j|\leq\frac{3n}{R}\leq\eps/2.
+\end{equation}
+These are estimates in a matching decreasing order; the computed
+$q_j$ themselves need not be decreasing. Sort the $q_j-2$ into
+increasing order to obtain $\widetilde\lambda_j$.
+
+For completeness, sorting preserves a uniform matching error.
+Suppose numbers $x_1\leq\cdots\leq x_n$ and matched approximations
+$y_i$ satisfy $|y_i-x_i|\leq\eta$.
+For each $j$, at least $j$ of the $y_i$ are at most $x_j+\eta$,
+using indices $i\leq j$; at least $n-j+1$ are at least
+$x_j-\eta$, using $i\geq j$. The $j$th order statistic of the
+$y_i$ therefore lies in $[x_j-\eta,x_j+\eta]$.
+Applying this fact to~\eqref{eq:q-error} proves
+\eqref{eq:spectral-accuracy}, including multiplicities.
+
+The least doubling count is $k=O(1+\log(n/\eps))$.
+The continuant product costs~\eqref{eq:continuant-cost};
+$k$ Graeffe steps cost $O(kn[1+\log n])$;
+the ratios and their iterated square roots cost $O(nk)$;
+and a deterministic comparison sort costs $O(n[1+\log n])$.
+Since $\eps<1$, all these terms are bounded by
+$O(n[1+\log(n/\eps)]^2)$.
+\end{proof}
+
+\subsection{The accuracy required by interval selection}
+
+At any queried $t\in[0,\delta/n]$, the matrix $H=T+tX$ has norm
+less than $3/2$. Apply Lemma~\ref{lem:spectral-approximation} to
+$A=H/2$, whose norm is less than one. For a child of length $\ell$,
+set
+\begin{equation}\label{eq:oracle-parameters}
+ E_{\mathrm{val}}=\frac{\ell}{1024},\qquad
+ \eps=\frac{\ell}{2048W}.
+\end{equation}
+These parameters are strictly positive, and $\eps<1$.
+Doubling the returned eigenvalue approximations for $A$ gives ordered
+approximations $\widehat\lambda_j$ to those of $H$, with error at
+most $\eps$ each. Thus
+\begin{equation}\label{eq:oracle-error}
+ \widehat F(t)=\sum_{j=1}^n j\widehat\lambda_j,
+ \qquad
+ |\widehat F(t)-F(t)|\leq W\eps
+ =\frac{\ell}{2048}\leq E_{\mathrm{val}}.
+\end{equation}
+This meets the error promise of Lemma~\ref{lem:robust-choice} with
+room to spare. The weighted summation itself takes $O(n)$ operations.
+
+The smallest child length used in the $K$ rounds is $|I_K|$.
+By~\eqref{eq:radius} and $W\leq n^2$, every requested accuracy
+satisfies
+\begin{equation}\label{eq:epsilon-lower}
+ \eps>\frac{\delta}{2^{21}n^9},\qquad
+ \frac n\eps<\frac{2^{21}n^{10}}\delta.
+\end{equation}
+Consequently
+$1+\log(n/\eps)=O(1+\log(n/\delta))$
+uniformly over all calls. This proves the required per-call cost
+\begin{equation}\label{eq:query-cost}
+ O\bigl(n[1+\log(n/\delta)]^2\bigr).
+\end{equation}
+
+\section{The deterministic algorithm and its guarantee}
+\label{sec:algorithm}
+
+Given the promised input, compute $W=n(n+1)/2$ and initialize
+$I=[0,\delta/n]$. The following steps specify all choices.
+\begin{enumerate}
+ \item Starting with $1$, repeatedly double until reaching
+ $2^K\geq16n^3$; take the least such $K$.
+ \item Repeat $K$ times. If $I=[a,b]$ has length $L$, form its
+ two middle-quarter children~\eqref{eq:children}. For each
+ $J=[u,v]$ of length $\ell$, evaluate $F$ at
+ $u,u+\ell/4,v-\ell/4,v$ by
+ \eqref{eq:oracle-parameters}--\eqref{eq:oracle-error}, and form
+ \begin{equation}\label{eq:computed-potential}
+ \widehat P(J)=\frac4\ell\bigl(
+ \widehat F(v)-\widehat F(v-\ell/4)
+ -\widehat F(u+\ell/4)+\widehat F(u)\bigr).
+ \end{equation}
+ Replace $I$ by the child with smaller $\widehat P$, choosing
+ the left child in a tie.
+ \item Return $D=\diag(c,2c,\ldots,nc)$, where $c$ is the
+ midpoint of the final interval.
+\end{enumerate}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+The evaluator is deterministic, and~\eqref{eq:oracle-error} supplies
+the promised errors at every query. Proposition~\ref{prop:selector}
+therefore proves~\eqref{eq:output}, the perturbation norm bound,
+and~\eqref{eq:strong-gap}. Since $10^{12}<2^{40}$,
+$4096^4=2^{48}$, and $0<\delta<1$ implies
+$\delta^4\geq\delta^{42}$, the stronger bound yields
+\[
+ \gap(T+D)>
+ \frac{\delta^4}{10^{12}\,2^{48}n^{42}}
+ >2^{-88}\frac{\delta^{42}}{n^{42}},
+\]
+as required.
+
+There are $K=O(\log n)$ rounds and at most eight evaluations per
+round. Multiplying~\eqref{eq:query-cost} by this bound, and using
+$\log n\leq\log(n/\delta)$, proves~\eqref{eq:main-cost}.
+Computing squared complex edge magnitudes, preparing the queried
+diagonals, forming potentials, performing the doubling tests, and
+writing the $n$ output entries are all included in this bound.
+All denominators in the algorithm are strictly positive, as verified
+above. The only square roots are
+\eqref{eq:half-angle} and the positive coefficient-ratio roots.
+No input digit is inspected, and no logarithm, trigonometric value,
+or unrestricted root is used as a primitive.
+\end{proof}
+
+\subsection{Degenerate inputs and scope}\label{sec:degenerate}
+
+Complex edges enter the computation through
+$|x+iy|^2=x^2+y^2$; the proof's phase gauge need not be computed.
+Zero edges are allowed both in the quasimode lemma, where they
+immediately satisfy the weak-edge alternative, and in the continuant
+recurrence. Repeated eigenvalues are allowed in the variational
+formula, the quasimode argument, the coefficient-ratio bounds, and
+the sorting argument. The algorithm never divides by a gap or by an edge.
+In dimension two the same proof and algorithm apply unchanged:
+the row determinant identity has one term, and all cuts and bounds
+remain meaningful.
+
+The quasimodes and the nearby matrix $H'$ are used only to establish
+the guarantee; the algorithm does not compute them. Its branch
+decisions use exact comparisons between the constructed approximate
+value expressions. An equality is resolved by the prescribed left
+tie rule. The result is an all-input exact-operation theorem, with
+no restriction to rational inputs, generic spectra, or nonzero edges.
+It supplies a deterministic choice
+within the single one-parameter family $tX$ for every promised input.
+
+\section{Exact supporting verification}\label{sec:verification}
+
+Four supporting programs check finite instances of the algebraic
+identities and quantitative bounds in the proof. Their decisive
+arithmetic uses integers and rational numbers. Root enclosures used
+in the checks have rational endpoints and are verified by exact
+power comparisons. Floating-point eigenvalue calculations and
+numerical rank decisions play no role.
+
+The polynomial checks compare three continuants with determinants
+expanded by permutations, examine five positive-root families
+including repeated roots, and check thirty Graeffe transformations
+and thirty-five coefficient-ratio rounds. The convex-selection checks
+use ninety rational piecewise-linear convex functions and $8{,}064$
+value calls with bounded rational errors. Secants are also obtained
+by integrating the corresponding step derivatives, providing a
+separate check of the potential and child-selection formulas.
+The input fixtures include a fixed sequence of integers; this fixture
+generation has no probabilistic role in the theorem.
+
+Nine rational eigenpair cases check the Wronskian and direction
+projection identities and the skipped-row residual identity.
+Separate rational fixtures check both coordinates of the full-matrix
+commutator~\eqref{eq:leakage}, the nearby matrix
+\eqref{eq:flattening}, and the spectral-weight swap
+\eqref{eq:weight-swap}. A separate recursive-arithmetic program checks
+Graeffe ratios, interval and prefix-product identities. Supplementary
+characteristic-polynomial identities in that program are not premises
+of the separation construction.
+
+Nineteen deliberately corrupted variants alter signs, coefficients,
+selection decisions, error promises, convexity assumptions, radii,
+residual terms, boundary contributions, weight swaps, or constants.
+Every such variant must be rejected. The positive checks and the
+registered rejections agree under ordinary execution, optimized
+execution and a second hash seed. Their failure conditions remain
+active under optimization. File and proof bindings are checked
+before and after execution, and further integrity tests reject
+altered or incomplete inventories.
+
+An independent integer and rational calculation confirms the
+numerical constants, including
+\[
+ 80^4\cdot16=655{,}360{,}000<10^{12},\qquad
+ \frac{4(\ell/1024)}{\ell/4}=\frac1{64},
+\]
+\[
+ 4\cdot7+14=42,\qquad
+ 4096^4=2^{48},\qquad 10^{12}<2^{40}.
+\]
+It also checks the two error allowances in the child choice and the
+geometric error sum in~\eqref{eq:final-potential}; altered constants
+are rejected. These computations support the identities and
+constant comparisons. The all-input conclusion, the absence of a
+spectral-gap assumption in the evaluator, and the asymptotic
+operation count follow from the written proofs above. Finite checks
+are not a proof by testing of those quantified assertions and do not
+provide a large-dimensional performance or finite-precision guarantee.
+
+\input{sections/finite_bit}
+
+\section*{Acknowledgements}
+TBD
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+\end{document}

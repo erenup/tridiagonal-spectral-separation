@@ -1,0 +1,86 @@
+{
+  "check_convex_selector.py": [
+    {
+      "name": "wrong-child",
+      "stderr": "FAIL: robust half-variation choice\n"
+    },
+    {
+      "name": "oracle-accuracy",
+      "stderr": "FAIL: oracle error promise\n"
+    },
+    {
+      "name": "unguarded-radius",
+      "stderr": "FAIL: centered curvature control\n"
+    },
+    {
+      "name": "nonconvex-hinge",
+      "stderr": "FAIL: nonconvex hinge\n"
+    }
+  ],
+  "check_inverse_tunneling.py": [
+    {
+      "name": "wronskian-sign",
+      "stderr": "FAIL: Wronskian telescoping sign\n"
+    },
+    {
+      "name": "projector-norm",
+      "stderr": "FAIL: direction-projector squared identity\n"
+    },
+    {
+      "name": "skipped-row-residual",
+      "stderr": "FAIL: distance-two recurrence and residual row\n"
+    },
+    {
+      "name": "outside-leakage",
+      "stderr": "FAIL: both full commutator boundary components\n"
+    },
+    {
+      "name": "flattening-overlap",
+      "stderr": "FAIL: flattening expansion\n"
+    },
+    {
+      "name": "weight-swap",
+      "stderr": "FAIL: ordered support slope separation\n"
+    },
+    {
+      "name": "gap-threshold",
+      "stderr": "FAIL: fourth-power curvature threshold\n"
+    }
+  ],
+  "check_primitives.py": [
+    {
+      "name": "graeffe-odd-sign",
+      "stderr": "FAIL: wrong Graeffe odd sign\n"
+    },
+    {
+      "name": "continuant-coupling-sign",
+      "stderr": "FAIL: wrong continuant coupling sign\n"
+    },
+    {
+      "name": "negative-root-ratio",
+      "stderr": "FAIL: positive repeated-square-root radicand\n"
+    },
+    {
+      "name": "curvature-constant",
+      "stderr": "FAIL: false local-curvature constant\n"
+    }
+  ],
+  "check_recursive_primitives.py": [
+    {
+      "name": "graeffe-coefficient",
+      "stderr": "FAIL: Graeffe positive-root squaring identity\n"
+    },
+    {
+      "name": "resonant-shift",
+      "stderr": "FAIL: empty interval midpoint margin\n"
+    },
+    {
+      "name": "missing-prefix-node",
+      "stderr": "FAIL: offline prefix transfer-product query\n"
+    },
+    {
+      "name": "characteristic-coefficient",
+      "stderr": "FAIL: normalized leading3 characteristic identity\n"
+    }
+  ]
+}

@@ -13,15 +13,15 @@ Its open numerical questions do not change the theorem's all-input scope.
 ## Exact-arithmetic theorem
 
 For every integer $n\geq2$, every Hermitian tridiagonal
-$T\in\mathbb C^{n\times n}$ with induced Euclidean norm $\lVert T\rVert_2\leq1$,
+$T\in\mathbb C^{n\times n}$ with induced Euclidean norm $`\lVert T\rVert_2\leq1`$,
 and every real $0\lt\delta\lt1/2$, Theorem 1.1 gives a deterministic
 algorithm which, given the three diagonals of $T$, constructs
 
-$$
+```math
 D=t\mathrm{diag}(1,\ldots,n),\qquad 0\leq t\leq\delta/n,
-$$
+```
 
-with $\lVert D\rVert_2\leq\delta$ and
+with $`\lVert D\rVert_2\leq\delta`$ and
 $\mathrm{gap}(T+D)\gt2^{-88}(\delta/n)^{42}$, using
 $O(n[1+\log(n/\delta)]^3)$ exact real arithmetic operations and
 comparisons. The gap is the minimum consecutive difference of the
@@ -43,28 +43,28 @@ Section 9 uses a different oracle and input model.
 
 For integers $n\geq2$ and $d\geq2$, put $\delta=2^{-d}$ and
 
-$$
+```math
 a=\min\{k:2^k\geq4n/\delta\},\quad
 K=\min\{k:2^k\geq16n^3\},\quad
 m=\min\{k:2^k\geq n^2\},\quad p=a+2K+20+m,
-$$
+```
 
 where the minima are over nonnegative integers. Set $Q=2^p$,
 $\eta=Q^{-1}$, $\beta=2^{-a}$ and $\ell=\beta4^{-K}$.
 The finite input consists of $n,d$ and a Hermitian tridiagonal proxy
-$T_0$ whose real diagonal and real/imaginary edge components are
+$`T_0`$ whose real diagonal and real/imaginary edge components are
 multiples of $\eta$ and differ by at most $\eta$ from those of the
-promised Hermitian tridiagonal matrix $T$ with $\lVert T\rVert_2\leq1$. The entries of $T$ need not be rational
+promised Hermitian tridiagonal matrix $T$ with $`\lVert T\rVert_2\leq1`$. The entries of $T$ need not be rational
 or separately accessible. Reading and rounding an original rational
 representation has additional cost.
 
 Theorem 9.1 returns a dyadic $c$ and $D=c\mathrm{diag}(1,\ldots,n)$
 with
 
-$$
+```math
 0\leq nc\leq\delta/4,\qquad
 \mathrm{gap}(T+D)\gt2^{-100}\delta^4/n^{42}.
-$$
+```
 
 It uses $O(n^2p(1+\log n))$ integer operations on $O(p)$-bit integers,
 or $O(n^2p^3(1+\log n))$ schoolbook bit operations, and $O(np)$ bits
@@ -73,7 +73,7 @@ constants. There are no square-root, eigenvalue, exact-real-sign or
 unbounded-precision-real primitives.
 
 The $O(np)$-bit certificate consists of ordered-eigenvalue enclosures at
-$T_0+(c-r)X$, $T_0+cX$, $T_0+(c+r)X$, with
+$`T_0+(c-r)X`$, $`T_0+cX`$, $`T_0+(c+r)X`$, with
 $X=\mathrm{diag}(1,\ldots,n)$ and $r=\ell/4$, and a rational
 convexity-defect bound. An independent rational-inertia verifier checks
 the intended input, the enclosures and that bound. The same output and

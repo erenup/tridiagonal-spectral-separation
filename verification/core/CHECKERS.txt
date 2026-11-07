@@ -1,0 +1,101 @@
+# KE-02 exact checks: the checkers and their negative controls.
+# A negative control is a deliberately wrong constant, formula or input that must be rejected;
+# a checker (and run_checks.py) fails if any control is accepted. run_checks.py requires that the
+# controls listed here are exactly the controls executed and rejected, with identical descriptions.
+# Layout: checker file name; indented two spaces: check family; indented four spaces: control id,
+# two spaces, description.
+
+check_constants.py
+  C01  Lemma 2.1, (8)-(10), S_h(t) < n^3 [secant slopes, tail sums]
+    C01.N1  (8) with trace coefficient n/2 instead of (n+1)/2
+    C01.N2  upper secant bound replaced by sum j^2 - 1 (below the slope of F for large t)
+  C02  Examples 2.2, 2.3, 3.1, 3.2, 4.1 [exactly checkable claims]
+    C02.N1  (17) with 1/h replaced by 1/(2h)
+    C02.N2  Example 2.3 value 1.8641 instead of 1.8541
+    C02.N3  Example 3.1 eigenvalue -5.173892e-6 (changed digit)
+  C03  Lemma 3.1 Step 1, (21) [1/4, 3/4, 3/8, sqrt(3/8) > 1/2]
+    C03.N1  threshold 1/sqrt(n) instead of 1/(2 sqrt n): discarded mass n (1/sqrt n)^2 <= 1/4
+    C03.N2  ratio 1/4 instead of 3/8: sqrt(1/4) > 1/2
+    C03.N3  projector-gap identity with the dot product in place of the determinant
+  C04  Lemma 3.1 Step 2, (22) [discrete Wronskian identity, bound 1/2]
+    C04.N1  (22) with the sign of the right-hand side reversed
+    C04.N2  bound 1/4 instead of 1/2 for |sum_{j<=i} u1_j u2_j|
+  C05  Lemma 3.1 Step 3, (23) [tau, cases (a)-(c), 5/16 < 1/2]
+    C05.N1  tau = 2 sqrt(n gamma): (n-1) 5 gamma / tau^2 = 5(n-1)/(4n) < 1/2 at n = 2
+    C05.N2  path of n^2 steps instead of at most n - 1: n^2 * 5/(16 n) < 1/2 at n = 2
+    C05.N3  case (c) bound 2 gamma/tau^2 (second term dropped), near-extremal instance
+  C06  Lemma 3.1 Step 4, (20) [residuals, commutator, 16 n sqrt(gamma)]
+    C06.N1  Step 4 with sqrt 2 tau replaced by 2 tau
+    C06.N2  commutator with the signs of both boundary terms reversed
+    C06.N3  response gap >= 2 instead of >= 1 (adjacent unit vectors across the cut)
+  C07  Lemma 3.2, (26)-(27) [AQ + QA - QAQ, 96 n sqrt(gamma), S^aux >= 1]
+    C07.N1  the sqrt 2 of the two-term sum omitted: 3 sqrt 2 * 16 n sqrt gamma = 96 n sqrt gamma
+    C07.N2  expansion with +QAQ instead of -QAQ
+    C07.N3  nuclear-Frobenius factor 1 instead of sqrt 2 (rank-two identity)
+  C08  Proposition 3.1, (19), (28) [2^20, transfer 4, 5/8 > 1/2]
+    C08.N1  2^18 instead of 2^20 in gamma: 1 - 384/512 > 1/2
+    C08.N2  nuclear constant 192 instead of 96: 1 - 768/1024 > 1/2
+    C08.N3  transfer coefficient 3 instead of 4 (worst-case errors)
+    C08.N4  (28) with weight n - 1 instead of n
+  C09  Lemma 4.1, (29)-(30) [weights, 4/3, 2/3, h/256 -> 1/64]
+    C09.N1  weight constant 5/4 instead of 4/3
+    C09.N2  (29) with factor 1/2 instead of 2/3 (sharp instance)
+    C09.N3  tolerance r/128 instead of r/256: estimate error <= 1/64
+  C10  Theorem 4.1, Remark 4.1, (31)-(32) [K_b, 5/32 + 2/64 < 1/2, 3 + 5K_b]
+    C10.N1  K_b - 1 refinements: (2/3)^(K_b - 1) n^3 <= 1/16 for all n
+    C10.N2  K = ceil(log2(16 n^3)) refinements in place of K_b: (2/3)^K n^3 <= 1/16
+    C10.N3  4 evaluations per refinement
+  C11  Lemma 4.2, (33)-(36) [S_h <= S_h^(theta), 1/2, 2 theta h/256 -> 1/64]
+    C11.N1  (34) for theta = 1
+    C11.N2  (35) with factor 1/3 instead of 1/2 (sharp instance)
+    C11.N3  tolerance doubled to 4 theta h'/256: estimate error <= 1/64
+  C12  Algorithm 2, Theorem 4.2, (37)-(40), Theorem 1.1, (5) [K, theta, Bernoulli, 2^-34]
+    C12.N1  K - 1 refinements: 2^(K-1) >= 16 n^3
+    C12.N2  theta = 1/(2K): (1/2 - theta)^K > 1/(64 n^3) for all n <= 10000
+    C12.N3  Bernoulli bound 3/4 instead of 1/2 at K = 1
+    C12.N4  constant doubled: h > delta/(128 n^4) gives h^2/(2^20 n^4) > 2 * 2^-34 delta^2 n^-12
+    C12.N5  7 evaluations per refinement (7 endpoint points plus the new centre are distinct)
+  C13  Algorithms 1 and 2 as transcripts, Theorems 4.1 and 4.2 [exact instances]
+    C13.N1  replies outside the tolerance (Algorithm 2 then returns with S_h(t) = 3)
+    C13.N2  stopping test without the margin 1/64 (returns a window with S_h(t) = 1/2)
+  C14  Lemma 4.3, Section 4.3, Appendix A [eta, R >= 8n/eta, 2^x - 1 <= x, total error]
+    C14.N1  2^x - 1 <= x at x = 3/2 (outside [0, 1]): 2^3 * 2^2 <= 5^2
+    C14.N2  2^x - 1 <= x at x = -1/2: 2^(-1/2) <= 1/2
+    C14.N3  doubling target 4n instead of 8n: 4n/R <= eta/2
+    C14.N4  eta = 8 eps/(n(n+1)) (four times eps/sum j): total error <= eps
+
+check_appendix_a.py
+  A01  Appendix A recurrence = det(zI + 2I + A) [real symmetric, complex Hermitian, Kac]
+    A01.N1  recurrence with c_i = beta_i instead of |beta_i|^2
+    A01.N2  recurrence with + c_{i-1} P_{i-2}
+    A01.N3  determinant input perturbed (a_1 + 1/8)
+    A01.N4  complex Hermitian with c_i = Re^2 - Im^2
+  A02  Appendix A even/odd split and Graeffe steps [prod (z + r_j^(2^k))]
+    A02.N1  G(P) = E(z)^2 - z O(z)^2 (sign convention for prod (z - r_j))
+    A02.N2  G(P) = E(-z)^2 - z O(-z)^2
+    A02.N3  three steps give prod (z + r_j^6) (exponent 2k instead of 2^k)
+  A03  Appendix A coefficient bounds, (43) [p_j <= e_j <= 2^n p_j, ratio bounds]
+    A03.N1  upper bound p_j instead of 2^n p_j (e_j <= p_j)
+    A03.N2  roots labelled in increasing order
+    A03.N3  C(n,j) - 1 instead of C(n,j) (equal roots attain C(n,j))
+  A04  Appendix A pipeline, Lemma 4.3 [R >= 8n/eta, k square roots, lambda^_j = r^_{n+1-j} - 2]
+    A04.N1  matching without index reversal (lambda^_j = r^_j - 2)
+    A04.N2  ratio e_{j-1}/e_j instead of e_j/e_{j-1}
+    A04.N3  one Graeffe step fewer than k with the same R-th root
+
+run_checks.py
+  R  runner: SHA256SUMS, source lint, byte-identical runs, fail-closed plumbing
+    R.N1  output with one byte changed (byte-identity comparison)
+    R.N2  SHA256SUMS against a file modified in memory
+    R.N3  SHA256SUMS against a folder listing with an unlisted file
+    R.N4  a subprocess that prints a FAIL line and exits with status 1
+    R.N5  lint: float literal
+    R.N6  lint: assert statement
+    R.N7  lint: import outside the allowlist
+    R.N8  lint: float() call
+    R.N9  lint: integer power with a negative exponent
+    R.N10  lint: open() for writing
+    R.N11  lint: import math and math.sqrt
+    R.N12  lint: from math import sqrt
+    R.N13  check_constants.py --inject-fault (nuclear constant 192 in Proposition 3.1)
+    R.N14  check_appendix_a.py --inject-fault (c_i = beta_i in the Appendix A recurrence)

@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: "Please cite the manuscript using the preferred citation below."
+type: software
+title: "A Deterministic Algorithm for Eigenvalue Separation in Tridiagonal Matrices"
+authors:
+  - given-names: "Wenqi"
+    family-names: "Zhu"
+    affiliation: "Mathematical Institute, Woodstock Road, University of Oxford, Oxford, UK, OX2 6GG"
+    email: "wenqi.zhu@maths.ox.ac.uk"
+  - given-names: "Ping"
+    family-names: "Nie"
+    affiliation: "David R. Cheriton School of Computer Science, University of Waterloo"
+    email: "ping.nie@uwaterloo.ca"
+license: MIT
+repository-code: "https://github.com/erenup/tridiagonal-spectral-separation"
+abstract: >-
+  For every n >= 2, every 0 < delta < 1/2 and every Hermitian tridiagonal
+  n x n matrix T with ||T||_2 <= 1, a deterministic algorithm selects t in
+  [0, delta/n] such that D = tX, with X = diag(1, ..., n), satisfies
+  ||D||_2 <= delta and gap(T + D) > 2^-34 delta^2 n^-12 >= 2^-34 (delta/n)^12.
+  The construction uses a classical convex weighted eigenvalue sum and its
+  finite-scale slope variation; a tridiagonal localization argument turns
+  near-degenerate eigenvalues into separated responses to the fixed diagonal
+  direction, yielding a quantitative gap certificate. An adaptive interval
+  selector identifies a certifying window in at most ceil(log2(16 n^3))
+  refinements. With an exact-arithmetic spectral-function oracle based on
+  the determinant recurrence and Graeffe root-squaring, the algorithm uses
+  O(n[1 + log(n/delta)]^3) arithmetic operations, comparisons and square
+  roots, which answers the nearly linear deterministic Minami perturbation
+  question KE-02 with a = 12, c_0 = 2^-34 and q = 3. Includes the paper, a
+  Lean formalization of the finite and scalar core, exact supporting checks
+  and the code and data of the numerical illustrations. Files outside paper/
+  are licensed under MIT; files in paper/, including the manuscript source
+  and PDF, are licensed under CC BY-SA 4.0.
+preferred-citation:
+  type: unpublished
+  license: CC-BY-SA-4.0
+  title: "A Deterministic Algorithm for Eigenvalue Separation in Tridiagonal Matrices"
+  authors:
+    - given-names: "Wenqi"
+      family-names: "Zhu"
+      affiliation: "Mathematical Institute, Woodstock Road, University of Oxford, Oxford, UK, OX2 6GG"
+      email: "wenqi.zhu@maths.ox.ac.uk"
+    - given-names: "Ping"
+      family-names: "Nie"
+      affiliation: "David R. Cheriton School of Computer Science, University of Waterloo"
+      email: "ping.nie@uwaterloo.ca"

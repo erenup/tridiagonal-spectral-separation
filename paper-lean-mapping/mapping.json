@@ -1,0 +1,2017 @@
+{
+  "schema_version": 1,
+  "paper": "paper/main.tex",
+  "pages": 28,
+  "scope": "Every numbered theorem, proposition, lemma, definition, example, remark and algorithm of paper/main.tex and its included fragments is indexed in TeX order, with its page in paper/main.pdf, and eight supporting anchors (equations and Appendix A) are listed. Every field of the nine components of the Lean proposition KE02.CoreCertificate, and every field of KE02.Algorithm2Outcome, is mapped to the declarations that prove it. Each entry states its coverage: formalized in full, formalized scalar part only, exact finite cross-check only, or written proof only. Where a Lean statement uses Lemma 2.1, convexity of F and the secant bounds (9) are explicit premises; Lemma 2.1 itself is not formalized.",
+  "lean": {
+    "root": "lean",
+    "declaration": "KE02.coreCertificate",
+    "source": "lean/KE02.lean",
+    "proposition": "KE02.CoreCertificate",
+    "proposition_source": "lean/KE02/Statement.lean",
+    "axiom_probe": "lean/audit/Axioms.lean",
+    "scope": "KE02.CoreCertificate has no hypotheses; each of its nine components is a structure of universally quantified statements with all premises explicit. Where the paper uses Lemma 2.1 for the spectral function, the Lean statements take an arbitrary function F with convexity and, where needed, the secant bounds (9) as premises. No spectral theory, matrix gap statement, oracle as an algorithm, cost or complexity bound is formalized."
+  },
+  "lean_components": [
+    {
+      "id": "endpoint",
+      "field": "KE02.CoreCertificate.endpoint",
+      "structure": "KE02.EndpointCertificate",
+      "structure_source": "lean/KE02/EndpointStatement.lean",
+      "declaration": "KE02.endpointCertificate",
+      "source": "lean/KE02/EndpointProof.lean",
+      "scope": "Inequality (34), the nonnegativity of (13) and (33) for convex F, and Lemma 4.2 with its proof ingredients, for every 0 < θ ≤ 1/4."
+    },
+    {
+      "id": "algorithm2",
+      "field": "KE02.CoreCertificate.algorithm2",
+      "structure": "KE02.Algorithm2Certificate",
+      "structure_source": "lean/KE02/Algorithm2Statement.lean",
+      "declaration": "KE02.algorithm2Certificate",
+      "source": "lean/KE02/Algorithm2Proof.lean",
+      "scope": "K, θ and the constants of the proof of Theorem 4.2, and the run of Algorithm 2 on an arbitrary reply function whose replies meet the requested accuracies: Theorem 4.2 without Proposition 3.1."
+    },
+    {
+      "id": "basicSelector",
+      "field": "KE02.CoreCertificate.basicSelector",
+      "structure": "KE02.BasicSelectorCertificate",
+      "structure_source": "lean/KE02/BasicSelectorStatement.lean",
+      "declaration": "KE02.basicSelectorCertificate",
+      "source": "lean/KE02/BasicSelectorProof.lean",
+      "scope": "Lemma 4.1, one refinement of Algorithm 1, and the constants and scalar recursion of Theorem 4.1 and Remark 4.1."
+    },
+    {
+      "id": "graeffe",
+      "field": "KE02.CoreCertificate.graeffe",
+      "structure": "KE02.GraeffeCertificate",
+      "structure_source": "lean/KE02/GraeffeStatement.lean",
+      "declaration": "KE02.graeffeCertificate",
+      "source": "lean/KE02/GraeffeUniversal.lean",
+      "scope": "Appendix A: the even/odd split, one Graeffe step and its iterates, for all real roots."
+    },
+    {
+      "id": "coefficients",
+      "field": "KE02.CoreCertificate.coefficients",
+      "structure": "KE02.CoefficientCertificate",
+      "structure_source": "lean/KE02/CoefficientStatement.lean",
+      "declaration": "KE02.coefficientCertificate",
+      "source": "lean/KE02/CoefficientProof.lean",
+      "scope": "Appendix A: the coefficients e_j of ∏(X + r_i^(2^k)), their positivity, p_j ≤ e_j ≤ 2^n p_j and the ratio bounds."
+    },
+    {
+      "id": "rootExtraction",
+      "field": "KE02.CoreCertificate.rootExtraction",
+      "structure": "KE02.RootExtractionCertificate",
+      "structure_source": "lean/KE02/RootExtractionStatement.lean",
+      "declaration": "KE02.rootExtractionCertificate",
+      "source": "lean/KE02/RootExtractionProof.lean",
+      "scope": "Appendix A and the remark after Lemma 4.3: (43), the R-th root as k square roots, the error 4n/R ≤ η/2, the choice of k by doubling, and the index-wise matching with weighted error at most ε."
+    },
+    {
+      "id": "continuant",
+      "field": "KE02.CoreCertificate.continuant",
+      "structure": "KE02.ContinuantCertificate",
+      "structure_source": "lean/KE02/ContinuantStatement.lean",
+      "declaration": "KE02.continuantCertificate",
+      "source": "lean/KE02/ContinuantProof.lean",
+      "scope": "Appendix A: the determinant of a tridiagonal matrix is the continuant, and the recurrence ends in det(zI + 2I + A)."
+    },
+    {
+      "id": "localConstants",
+      "field": "KE02.CoreCertificate.localConstants",
+      "structure": "KE02.LocalConstantsCertificate",
+      "structure_source": "lean/KE02/LocalConstantsStatement.lean",
+      "declaration": "KE02.localConstantsCertificate",
+      "source": "lean/KE02/LocalConstantsProof.lean",
+      "scope": "The real-number inequalities and identities of the proofs of Lemma 3.1, Lemma 3.2 and Proposition 3.1, and the chain ending in 2^-34."
+    },
+    {
+      "id": "wronskian",
+      "field": "KE02.CoreCertificate.wronskian",
+      "structure": "KE02.WronskianCertificate",
+      "structure_source": "lean/KE02/WronskianStatement.lean",
+      "declaration": "KE02.wronskianCertificate",
+      "source": "lean/KE02/WronskianProof.lean",
+      "scope": "The discrete Wronskian identity (22) for the coordinate recurrence and the two bounds of Step 2 of the proof of Lemma 3.1."
+    }
+  ],
+  "lean_results": [
+    {
+      "id": "algorithm2_run",
+      "component": "algorithm2",
+      "via": "KE02.Algorithm2Certificate.run",
+      "structure": "KE02.Algorithm2Outcome",
+      "structure_source": "lean/KE02/Algorithm2Statement.lean",
+      "scope": "Everything proved about one run alg2Run O n δ of Algorithm 2, for the premises of run."
+    }
+  ],
+  "lean_targets": [
+    {
+      "id": "endpoint.centered_nonneg",
+      "component": "endpoint",
+      "field": "KE02.EndpointCertificate.centered_nonneg",
+      "proofs": [
+        "KE02.centered_nonneg"
+      ],
+      "scope": "For convex F and h > 0: S_h(t) ≥ 0, the inequality in (13)."
+    },
+    {
+      "id": "endpoint.endpoint_nonneg",
+      "component": "endpoint",
+      "field": "KE02.EndpointCertificate.endpoint_nonneg",
+      "proofs": [
+        "KE02.endpoint_nonneg"
+      ],
+      "scope": "For convex F, 0 < θ ≤ 1/2 and h > 0: the endpoint slope variation (33) is nonnegative."
+    },
+    {
+      "id": "endpoint.centered_le_endpoint",
+      "component": "endpoint",
+      "field": "KE02.EndpointCertificate.centered_le_endpoint",
+      "proofs": [
+        "KE02.centered_le_endpoint"
+      ],
+      "scope": "(34): S_h(t) ≤ S_h^(θ)(t) for convex F, 0 < θ ≤ 1/2 and h > 0."
+    },
+    {
+      "id": "endpoint.child_windows",
+      "component": "endpoint",
+      "field": "KE02.EndpointCertificate.child_windows",
+      "proofs": [
+        "KE02.child_windows"
+      ],
+      "scope": "Ring identities: the candidate windows of radius h' = (1/2 - θ)h centred at t ∓ h' are [t - (1-2θ)h, t] and [t, t + (1-2θ)h]."
+    },
+    {
+      "id": "endpoint.points_in_parent",
+      "component": "endpoint",
+      "field": "KE02.EndpointCertificate.points_in_parent",
+      "proofs": [
+        "KE02.refinePoint_in_parent"
+      ],
+      "scope": "For 0 < θ ≤ 1/4 and h > 0, the seven requested points of a refinement lie in the parent window [t - h, t + h]."
+    },
+    {
+      "id": "endpoint.points_of_children",
+      "component": "endpoint",
+      "field": "KE02.EndpointCertificate.points_of_children",
+      "proofs": [
+        "KE02.points_of_children"
+      ],
+      "scope": "The two child endpoint variations are the endpoint estimates formed from the values of F at the seven points (points 0-3 and 3-6)."
+    },
+    {
+      "id": "endpoint.children_sum",
+      "component": "endpoint",
+      "field": "KE02.EndpointCertificate.children_sum",
+      "proofs": [
+        "KE02.endpoint_children_sum"
+      ],
+      "scope": "For convex F, 0 < θ ≤ 1/4 and h > 0, the two child endpoint variations sum to at most the parent one (proof of Lemma 4.2)."
+    },
+    {
+      "id": "endpoint.contraction",
+      "component": "endpoint",
+      "field": "KE02.EndpointCertificate.contraction",
+      "proofs": [
+        "KE02.endpoint_contraction"
+      ],
+      "scope": "(35) for convex F, 0 < θ ≤ 1/4 and h > 0."
+    },
+    {
+      "id": "endpoint.estimate_error",
+      "component": "endpoint",
+      "field": "KE02.EndpointCertificate.estimate_error",
+      "proofs": [
+        "KE02.endpoint_estimate_error"
+      ],
+      "scope": "Four values within 2θh/256 give an endpoint estimate within 1/64 of S_h^(θ)."
+    },
+    {
+      "id": "endpoint.ties_left",
+      "component": "endpoint",
+      "field": "KE02.EndpointCertificate.ties_left",
+      "proofs": [
+        "KE02.selectCenter_tie"
+      ],
+      "scope": "The selection rule moves to t - h when the two computed estimates are equal."
+    },
+    {
+      "id": "endpoint.potential_step",
+      "component": "endpoint",
+      "field": "KE02.EndpointCertificate.potential_step",
+      "proofs": [
+        "KE02.endpoint_potential_step"
+      ],
+      "scope": "(36) for one refinement: with the seven replies within 2θh'/256, the selected centre satisfies S_h'^(θ) ≤ S_h^(θ)(t)/2 + 1/32."
+    },
+    {
+      "id": "algorithm2.K_spec",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Certificate.K_spec",
+      "proofs": [
+        "KE02.alg2K_spec"
+      ],
+      "scope": "K is the least natural number with 16n^3 ≤ 2^K."
+    },
+    {
+      "id": "algorithm2.K_doubling",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Certificate.K_doubling",
+      "proofs": [
+        "KE02.alg2K_doubling"
+      ],
+      "scope": "Repeated doubling from 1 returns K."
+    },
+    {
+      "id": "algorithm2.K_ceil_log",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Certificate.K_ceil_log",
+      "proofs": [
+        "KE02.alg2K_ceil"
+      ],
+      "scope": "K = ⌈log_2(16n^3)⌉ for n ≥ 1."
+    },
+    {
+      "id": "algorithm2.K_upper",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Certificate.K_upper",
+      "proofs": [
+        "KE02.alg2K_pos",
+        "KE02.alg2K_upper"
+      ],
+      "scope": "2^K < 32n^3 and K ≥ 1 for n ≥ 1."
+    },
+    {
+      "id": "algorithm2.theta_range",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Certificate.theta_range",
+      "proofs": [
+        "KE02.alg2Theta_facts"
+      ],
+      "scope": "θ = 1/(4K) satisfies 0 < θ ≤ 1/4 and 1/2 - θ = (1 - 1/(2K))/2."
+    },
+    {
+      "id": "algorithm2.bernoulli",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Certificate.bernoulli",
+      "proofs": [
+        "KE02.bernoulli_half"
+      ],
+      "scope": "(1 - 1/(2K))^K ≥ 1/2 for K ≥ 1."
+    },
+    {
+      "id": "algorithm2.LK_bound",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Certificate.LK_bound",
+      "proofs": [
+        "KE02.LK_bound"
+      ],
+      "scope": "L_K = (δ/n)(1/2 - θ)^K > δ/(64n^4) for n ≥ 1 and δ > 0."
+    },
+    {
+      "id": "algorithm2.main_bound_form",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Certificate.main_bound_form",
+      "proofs": [
+        "KE02.main_bound_form"
+      ],
+      "scope": "The second inequality of (5): 2^-34 δ^2 n^-12 ≥ 2^-34 (δ/n)^12 for n ≥ 1 and 0 < δ < 1."
+    },
+    {
+      "id": "algorithm2.stopping_constants",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Certificate.stopping_constants",
+      "proofs": [
+        "KE02.algorithm2Certificate"
+      ],
+      "scope": "1/8 + 1/128 + 1/64 < 1/2."
+    },
+    {
+      "id": "algorithm2.midpoint_estimate_error",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Certificate.midpoint_estimate_error",
+      "proofs": [
+        "KE02.midpoint_estimate_error"
+      ],
+      "scope": "For 0 < θ ≤ 1/4, three values within 2θh/256 give the centred estimate within θ/32 ≤ 1/128."
+    },
+    {
+      "id": "algorithm2.run",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Certificate.run",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "For every n ≥ 1, δ > 0, convex F satisfying (9) and every reply function whose replies to the requests of the run are within the requested errors, the run of Algorithm 2 satisfies every field of KE02.Algorithm2Outcome."
+    },
+    {
+      "id": "algorithm2.premises_satisfiable",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Certificate.premises_satisfiable",
+      "proofs": [
+        "KE02.algorithm2_premises_satisfiable"
+      ],
+      "scope": "For every n ≥ 1 and δ > 0 some F and reply function satisfy all premises of run."
+    },
+    {
+      "id": "basicSelector.weights",
+      "component": "basicSelector",
+      "field": "KE02.BasicSelectorCertificate.weights",
+      "proofs": [
+        "KE02.weights_le"
+      ],
+      "scope": "For h > 0, w_(t-h/4,h/4) + w_(t+h/4,h/4) ≤ (4/3) w_(t,h) pointwise."
+    },
+    {
+      "id": "basicSelector.weights_attained",
+      "component": "basicSelector",
+      "field": "KE02.BasicSelectorCertificate.weights_attained",
+      "proofs": [
+        "KE02.weights_attained"
+      ],
+      "scope": "Equality at x = t - h/4, so 4/3 cannot be lowered."
+    },
+    {
+      "id": "basicSelector.children_sum",
+      "component": "basicSelector",
+      "field": "KE02.BasicSelectorCertificate.children_sum",
+      "proofs": [
+        "KE02.basic_children_sum"
+      ],
+      "scope": "For convex F and h > 0: S_(h/4)(t - h/4) + S_(h/4)(t + h/4) ≤ (4/3) S_h(t)."
+    },
+    {
+      "id": "basicSelector.contraction",
+      "component": "basicSelector",
+      "field": "KE02.BasicSelectorCertificate.contraction",
+      "proofs": [
+        "KE02.basic_contraction"
+      ],
+      "scope": "(29) for convex F and h > 0."
+    },
+    {
+      "id": "basicSelector.estimate_error",
+      "component": "basicSelector",
+      "field": "KE02.BasicSelectorCertificate.estimate_error",
+      "proofs": [
+        "KE02.basic_estimate_error"
+      ],
+      "scope": "Three values within r/256 give the centred estimate within 1/64."
+    },
+    {
+      "id": "basicSelector.step",
+      "component": "basicSelector",
+      "field": "KE02.BasicSelectorCertificate.step",
+      "proofs": [
+        "KE02.basic_step"
+      ],
+      "scope": "(30) for one refinement of Algorithm 1: five replies within (h/4)/256, the smaller computed child variation selected, ties to the left."
+    },
+    {
+      "id": "basicSelector.initial",
+      "component": "basicSelector",
+      "field": "KE02.BasicSelectorCertificate.initial",
+      "proofs": [
+        "KE02.basic_initial"
+      ],
+      "scope": "From (9): S_h(t) < n^3 for n ≥ 1 and h > 0."
+    },
+    {
+      "id": "basicSelector.Kb_spec",
+      "component": "basicSelector",
+      "field": "KE02.BasicSelectorCertificate.Kb_spec",
+      "proofs": [
+        "KE02.basicK_spec"
+      ],
+      "scope": "K_b is the least natural number with (3/2)^(K_b) ≥ 16n^3."
+    },
+    {
+      "id": "basicSelector.Kb_ceil",
+      "component": "basicSelector",
+      "field": "KE02.BasicSelectorCertificate.Kb_ceil",
+      "proofs": [
+        "KE02.basicK_ceil"
+      ],
+      "scope": "K_b = ⌈log_(3/2)(16n^3)⌉ for n ≥ 1."
+    },
+    {
+      "id": "basicSelector.first_term",
+      "component": "basicSelector",
+      "field": "KE02.BasicSelectorCertificate.first_term",
+      "proofs": [
+        "KE02.first_term"
+      ],
+      "scope": "(2/3)^(K_b) n^3 ≤ 1/16."
+    },
+    {
+      "id": "basicSelector.iterate",
+      "component": "basicSelector",
+      "field": "KE02.BasicSelectorCertificate.iterate",
+      "proofs": [
+        "KE02.basic_iterate"
+      ],
+      "scope": "For every real sequence with s_0 < n^3 and s_(j+1) ≤ (2/3)s_j + 1/32: s_j < (2/3)^j n^3 + (1/32) Σ_(l<j) (2/3)^l."
+    },
+    {
+      "id": "basicSelector.geometric",
+      "component": "basicSelector",
+      "field": "KE02.BasicSelectorCertificate.geometric",
+      "proofs": [
+        "KE02.geometric"
+      ],
+      "scope": "(1/32) Σ_(l<j) (2/3)^l < 3/32."
+    },
+    {
+      "id": "basicSelector.final",
+      "component": "basicSelector",
+      "field": "KE02.BasicSelectorCertificate.final",
+      "proofs": [
+        "KE02.basic_final"
+      ],
+      "scope": "For such a sequence, s_(K_b) < 5/32."
+    },
+    {
+      "id": "basicSelector.stopping_constants",
+      "component": "basicSelector",
+      "field": "KE02.BasicSelectorCertificate.stopping_constants",
+      "proofs": [
+        "KE02.basicSelectorCertificate"
+      ],
+      "scope": "5/32 + 2/64 < 1/2."
+    },
+    {
+      "id": "basicSelector.calls",
+      "component": "basicSelector",
+      "field": "KE02.BasicSelectorCertificate.calls",
+      "proofs": [
+        "KE02.basicSelectorCertificate"
+      ],
+      "scope": "The arithmetic fact 3 + 5j ≤ 3 + 5K_b for j ≤ K_b; the evaluation count of Algorithm 1 is not formalized."
+    },
+    {
+      "id": "basicSelector.radius_lt_one",
+      "component": "basicSelector",
+      "field": "KE02.BasicSelectorCertificate.radius_lt_one",
+      "proofs": [
+        "KE02.basic_radius_lt_one"
+      ],
+      "scope": "(δ/(2n)) 4^-j ≤ δ/(2n) < 1 for δ < 1/2."
+    },
+    {
+      "id": "basicSelector.radius",
+      "component": "basicSelector",
+      "field": "KE02.BasicSelectorCertificate.radius",
+      "proofs": [
+        "KE02.basic_radius"
+      ],
+      "scope": "(32) for every radius (δ/(2n)) 4^-j with j ≤ K_b, n ≥ 1, δ > 0 and α = log_(3/2) 4."
+    },
+    {
+      "id": "graeffe.even_coeff",
+      "component": "graeffe",
+      "field": "KE02.GraeffeCertificate.even_coeff",
+      "proofs": [
+        "KE02.evenPart_coeff"
+      ],
+      "scope": "The coefficients of the even part E are those of P at even indices."
+    },
+    {
+      "id": "graeffe.odd_coeff",
+      "component": "graeffe",
+      "field": "KE02.GraeffeCertificate.odd_coeff",
+      "proofs": [
+        "KE02.oddPart_coeff"
+      ],
+      "scope": "The coefficients of the odd part O are those of P at odd indices."
+    },
+    {
+      "id": "graeffe.reconstruct",
+      "component": "graeffe",
+      "field": "KE02.GraeffeCertificate.reconstruct",
+      "proofs": [
+        "KE02.graeffe_reconstruct"
+      ],
+      "scope": "P(z) = E(z^2) + zO(z^2) for every real polynomial."
+    },
+    {
+      "id": "graeffe.one_step",
+      "component": "graeffe",
+      "field": "KE02.GraeffeCertificate.one_step",
+      "proofs": [
+        "KE02.graeffe_rootPolynomial"
+      ],
+      "scope": "One Graeffe step maps ∏(X + r_i) to ∏(X + r_i^2), for all real roots."
+    },
+    {
+      "id": "graeffe.iterate",
+      "component": "graeffe",
+      "field": "KE02.GraeffeCertificate.iterate",
+      "proofs": [
+        "KE02.graeffeIterate_rootPolynomial"
+      ],
+      "scope": "k Graeffe steps map ∏(X + r_i) to ∏(X + r_i^(2^k))."
+    },
+    {
+      "id": "coefficients.expansion",
+      "component": "coefficients",
+      "field": "KE02.CoefficientCertificate.expansion",
+      "proofs": [
+        "KE02.elementaryCoeff_expansion"
+      ],
+      "scope": "The coefficient e_j of ∏(X + r_i^(2^k)) is the elementary symmetric sum of degree j."
+    },
+    {
+      "id": "coefficients.leading",
+      "component": "coefficients",
+      "field": "KE02.CoefficientCertificate.leading",
+      "proofs": [
+        "KE02.elementaryCoeff_zero"
+      ],
+      "scope": "e_0 = 1."
+    },
+    {
+      "id": "coefficients.positive",
+      "component": "coefficients",
+      "field": "KE02.CoefficientCertificate.positive",
+      "proofs": [
+        "KE02.elementaryCoeff_pos"
+      ],
+      "scope": "e_j > 0 for positive roots and j ≤ n."
+    },
+    {
+      "id": "coefficients.bounds",
+      "component": "coefficients",
+      "field": "KE02.CoefficientCertificate.bounds",
+      "proofs": [
+        "KE02.elementaryCoeff_bounds"
+      ],
+      "scope": "p_j ≤ e_j ≤ C(n,j) p_j ≤ 2^n p_j for positive nonincreasing roots and j ≤ n."
+    },
+    {
+      "id": "coefficients.ratio_bounds",
+      "component": "coefficients",
+      "field": "KE02.CoefficientCertificate.ratio_bounds",
+      "proofs": [
+        "KE02.elementaryCoeff_ratio_bounds"
+      ],
+      "scope": "r_i^R/2^n ≤ e_(i+1)/e_i ≤ 2^n r_i^R with R = 2^k (Lean index i is the paper's j = i + 1)."
+    },
+    {
+      "id": "rootExtraction.graeffe_coeff",
+      "component": "rootExtraction",
+      "field": "KE02.RootExtractionCertificate.graeffe_coeff",
+      "proofs": [
+        "KE02.graeffeCoeff_eq"
+      ],
+      "scope": "The coefficients of the actual k-th Graeffe iterate are the e_j."
+    },
+    {
+      "id": "rootExtraction.coeff_bounds",
+      "component": "rootExtraction",
+      "field": "KE02.RootExtractionCertificate.coeff_bounds",
+      "proofs": [
+        "KE02.graeffeCoeff_bounds"
+      ],
+      "scope": "p_j ≤ e_j ≤ 2^n p_j for the actual iterate."
+    },
+    {
+      "id": "rootExtraction.ratio_root",
+      "component": "rootExtraction",
+      "field": "KE02.RootExtractionCertificate.ratio_root",
+      "proofs": [
+        "KE02.ratio_root"
+      ],
+      "scope": "(43) with R = 2^k and real powers."
+    },
+    {
+      "id": "rootExtraction.iterated_sqrt",
+      "component": "rootExtraction",
+      "field": "KE02.RootExtractionCertificate.iterated_sqrt",
+      "proofs": [
+        "KE02.iteratedSqrt_eq"
+      ],
+      "scope": "x^(1/2^k) is k successive square roots for x ≥ 0."
+    },
+    {
+      "id": "rootExtraction.two_rpow_sub_one_le",
+      "component": "rootExtraction",
+      "field": "KE02.RootExtractionCertificate.two_rpow_sub_one_le",
+      "proofs": [
+        "KE02.two_rpow_sub_one_le"
+      ],
+      "scope": "2^x - 1 ≤ x for 0 ≤ x ≤ 1."
+    },
+    {
+      "id": "rootExtraction.root_error",
+      "component": "rootExtraction",
+      "field": "KE02.RootExtractionCertificate.root_error",
+      "proofs": [
+        "KE02.root_error"
+      ],
+      "scope": "|r̂_j - r_j| ≤ 4n/R when 0 < r_j < 4 and n ≤ R."
+    },
+    {
+      "id": "rootExtraction.steps_least",
+      "component": "rootExtraction",
+      "field": "KE02.RootExtractionCertificate.steps_least",
+      "proofs": [
+        "KE02.graeffeSteps_least"
+      ],
+      "scope": "For η > 0, k is the least integer with 2^k η ≥ 8n."
+    },
+    {
+      "id": "rootExtraction.steps_doubling",
+      "component": "rootExtraction",
+      "field": "KE02.RootExtractionCertificate.steps_doubling",
+      "proofs": [
+        "KE02.graeffeDoubling_spec"
+      ],
+      "scope": "Doubling R from 1 and comparing Rη with 8n returns k."
+    },
+    {
+      "id": "rootExtraction.steps_choice",
+      "component": "rootExtraction",
+      "field": "KE02.RootExtractionCertificate.steps_choice",
+      "proofs": [
+        "KE02.graeffeSteps_spec"
+      ],
+      "scope": "For n ≥ 1 and 0 < η < 1: 8n/η ≤ R < 16n/η, n ≤ R and 4n/R ≤ η/2."
+    },
+    {
+      "id": "rootExtraction.weighted_error",
+      "component": "rootExtraction",
+      "field": "KE02.RootExtractionCertificate.weighted_error",
+      "proofs": [
+        "KE02.weighted_error"
+      ],
+      "scope": "Errors ε/(2Σj) in every λ_j give error at most ε in Σ_j jλ_j."
+    },
+    {
+      "id": "rootExtraction.sum_error",
+      "component": "rootExtraction",
+      "field": "KE02.RootExtractionCertificate.sum_error",
+      "proofs": [
+        "KE02.sum_error"
+      ],
+      "scope": "Errors η in every λ_j give error at most n(n+1)η/2: the remark after Lemma 4.3."
+    },
+    {
+      "id": "rootExtraction.pipeline",
+      "component": "rootExtraction",
+      "field": "KE02.RootExtractionCertificate.pipeline",
+      "proofs": [
+        "KE02.pipeline"
+      ],
+      "scope": "For n ≥ 1, roots in (0, 4) in nonincreasing order and 0 < ε < 1, with η = ε/Σj and k found by doubling: λ_j = r_(n+1-j) - 2 is nondecreasing, every λ̂_j = r̂_(n+1-j) - 2 is within η/2 of λ_j, and the weighted sum is within (n(n+1)/2)(η/2) ≤ ε."
+    },
+    {
+      "id": "continuant.det_tridiag",
+      "component": "continuant",
+      "field": "KE02.ContinuantCertificate.det_tridiag",
+      "proofs": [
+        "KE02.det_tridiag"
+      ],
+      "scope": "The determinant of a k x k tridiagonal matrix over any commutative ring R : Type is the continuant."
+    },
+    {
+      "id": "continuant.det_char",
+      "component": "continuant",
+      "field": "KE02.ContinuantCertificate.det_char",
+      "proofs": [
+        "KE02.det_char"
+      ],
+      "scope": "For every real A vanishing more than one step off the diagonal, det(zI + 2I + A) equals P_n of the recurrence of Appendix A."
+    },
+    {
+      "id": "continuant.symmetric_coeff",
+      "component": "continuant",
+      "field": "KE02.ContinuantCertificate.symmetric_coeff",
+      "proofs": [
+        "KE02.symmetric_coeff"
+      ],
+      "scope": "For symmetric A, c_i = A_(i,i+1)^2."
+    },
+    {
+      "id": "localConstants.discarded_rows",
+      "component": "localConstants",
+      "field": "KE02.LocalConstantsCertificate.discarded_rows",
+      "proofs": [
+        "KE02.discarded_rows"
+      ],
+      "scope": "Lemma 3.1, Step 1: n(1/(2√n))^2 = 1/4."
+    },
+    {
+      "id": "localConstants.direction_gap",
+      "component": "localConstants",
+      "field": "KE02.LocalConstantsCertificate.direction_gap",
+      "proofs": [
+        "KE02.direction_gap"
+      ],
+      "scope": "(21): √(3/8) > 1/2."
+    },
+    {
+      "id": "localConstants.tau_le",
+      "component": "localConstants",
+      "field": "KE02.LocalConstantsCertificate.tau_le",
+      "proofs": [
+        "KE02.tau_le"
+      ],
+      "scope": "Step 3: τ = 4√(nγ) ≤ 1/(4√n) for 0 ≤ γ ≤ 1/(256n^2)."
+    },
+    {
+      "id": "localConstants.case_a",
+      "component": "localConstants",
+      "field": "KE02.LocalConstantsCertificate.case_a",
+      "proofs": [
+        "KE02.case_a"
+      ],
+      "scope": "Step 3, case (a): γ/(2τ^2) ≤ 5γ/τ^2."
+    },
+    {
+      "id": "localConstants.case_c",
+      "component": "localConstants",
+      "field": "KE02.LocalConstantsCertificate.case_c",
+      "proofs": [
+        "KE02.case_c"
+      ],
+      "scope": "Step 3, case (c): 2γ/(AB) + γρ/(2B) ≤ 5γ/τ^2 for τ < A, τ < B and 0 ≤ ρ ≤ τ ≤ 1."
+    },
+    {
+      "id": "localConstants.total_change",
+      "component": "localConstants",
+      "field": "KE02.LocalConstantsCertificate.total_change",
+      "proofs": [
+        "KE02.total_change"
+      ],
+      "scope": "Step 3: 5nγ/τ^2 = 5/16 < 1/2."
+    },
+    {
+      "id": "localConstants.truncation",
+      "component": "localConstants",
+      "field": "KE02.LocalConstantsCertificate.truncation",
+      "proofs": [
+        "KE02.truncation"
+      ],
+      "scope": "Step 4: 2√n(γ/2 + √2 τ) ≤ 4√n τ = 16n√γ."
+    },
+    {
+      "id": "localConstants.nuclear",
+      "component": "localConstants",
+      "field": "KE02.LocalConstantsCertificate.nuclear",
+      "proofs": [
+        "KE02.nuclear"
+      ],
+      "scope": "Lemma 3.2, (26): 3√2 (a_1^2 + a_2^2)^(1/2) ≤ 96n√γ when 0 ≤ a_i ≤ 16n√γ."
+    },
+    {
+      "id": "localConstants.gamma_range",
+      "component": "localConstants",
+      "field": "KE02.LocalConstantsCertificate.gamma_range",
+      "proofs": [
+        "KE02.gamma_range"
+      ],
+      "scope": "Proposition 3.1: 0 < h ≤ 1 gives 0 < γ ≤ 1/(256n^2) for γ = h^2/(2^20 n^4)."
+    },
+    {
+      "id": "localConstants.aux_variation",
+      "component": "localConstants",
+      "field": "KE02.LocalConstantsCertificate.aux_variation",
+      "proofs": [
+        "KE02.aux_variation"
+      ],
+      "scope": "The quotient in (27) is the centred slope variation (13) of the auxiliary function."
+    },
+    {
+      "id": "localConstants.transfer",
+      "component": "localConstants",
+      "field": "KE02.LocalConstantsCertificate.transfer",
+      "proofs": [
+        "KE02.transfer"
+      ],
+      "scope": "(28) at t - h, t and t + h gives S_h(t) ≥ S_h^aux(t) - (4n/h)N, for arbitrary real functions F, G and reals n, N."
+    },
+    {
+      "id": "localConstants.constant",
+      "component": "localConstants",
+      "field": "KE02.LocalConstantsCertificate.constant",
+      "proofs": [
+        "KE02.prop31_constant"
+      ],
+      "scope": "1 - 384n^2 √γ/h = 5/8 > 1/2 at γ = h^2/(2^20 n^4), with 384/1024 = 3/8."
+    },
+    {
+      "id": "localConstants.chain",
+      "component": "localConstants",
+      "field": "KE02.LocalConstantsCertificate.chain",
+      "proofs": [
+        "KE02.prop31_chain"
+      ],
+      "scope": "The scalar chain of Proposition 3.1: S^aux ≥ 1, N ≤ 96n√γ and |F - G| ≤ nN at three points give S_h(t) > 1/2."
+    },
+    {
+      "id": "localConstants.gap_chain",
+      "component": "localConstants",
+      "field": "KE02.LocalConstantsCertificate.gap_chain",
+      "proofs": [
+        "KE02.gap_chain"
+      ],
+      "scope": "h > δ/(128n^4) gives h^2/(2^20 n^4) > 2^-34 δ^2 n^-12."
+    },
+    {
+      "id": "wronskian.identity",
+      "component": "wronskian",
+      "field": "KE02.WronskianCertificate.identity",
+      "proofs": [
+        "KE02.wronskian_identity"
+      ],
+      "scope": "(22) for every i ≤ n, for real sequences satisfying the coordinate equations of Step 2 with β_0 = 0."
+    },
+    {
+      "id": "wronskian.partial_inner",
+      "component": "wronskian",
+      "field": "KE02.WronskianCertificate.partial_inner",
+      "proofs": [
+        "KE02.partial_inner"
+      ],
+      "scope": "Step 2: |Σ_(j≤i) (u_1)_j (u_2)_j| ≤ 1/2 for orthonormal u_1, u_2."
+    },
+    {
+      "id": "wronskian.bound",
+      "component": "wronskian",
+      "field": "KE02.WronskianCertificate.bound",
+      "proofs": [
+        "KE02.wronskian_bound"
+      ],
+      "scope": "Step 2: |β_i| |det(r_i, r_(i+1))| ≤ γ/2 when |λ - μ| ≤ γ."
+    },
+    {
+      "id": "run.returns",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.returns",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "The run executes a return statement."
+    },
+    {
+      "id": "run.refinements_le",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.refinements_le",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "It performs at most K refinements."
+    },
+    {
+      "id": "run.state_eq",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.state_eq",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "The returned state is the state reached after the performed refinements."
+    },
+    {
+      "id": "run.earlier_tests_fail",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.earlier_tests_fail",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "Every earlier stopping test fails."
+    },
+    {
+      "id": "run.returned_test_passes",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.returned_test_passes",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "The returned state passes the stopping test Ŝ_h(t) + 1/64 < 1/2."
+    },
+    {
+      "id": "run.radius_formula",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.radius_formula",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "h_j = (1/2 - θ)^j δ/(2n) for every j."
+    },
+    {
+      "id": "run.windows_inside",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.windows_inside",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "Every window [t_j - h_j, t_j + h_j] lies in [0, δ/n]."
+    },
+    {
+      "id": "run.windows_nested",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.windows_nested",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "Every window lies in the previous one."
+    },
+    {
+      "id": "run.initial_potential",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.initial_potential",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "The initial endpoint variation is below n^3, from (9)."
+    },
+    {
+      "id": "run.potential_step",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.potential_step",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "(36) at every performed refinement."
+    },
+    {
+      "id": "run.potential_bound",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.potential_bound",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "The iterated form of (36) used in the proof of Theorem 4.2."
+    },
+    {
+      "id": "run.potential_final",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.potential_final",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "If K refinements are performed, the endpoint variation is below 1/8."
+    },
+    {
+      "id": "run.estimate_accuracy",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.estimate_accuracy",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "The estimate of the returned test is within 1/64 of S_h(t)."
+    },
+    {
+      "id": "run.centered_lt_half",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.centered_lt_half",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "(37), first part: S_h(t) < 1/2 at the returned pair."
+    },
+    {
+      "id": "run.radius_lower",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.radius_lower",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "(37), last part: h > δ/(128n^4)."
+    },
+    {
+      "id": "run.radius_upper",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.radius_upper",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "h ≤ δ/(2n)."
+    },
+    {
+      "id": "run.window",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.window",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "(37), middle part: [t - h, t + h] ⊆ [0, δ/n]."
+    },
+    {
+      "id": "run.budget",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.budget",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "0 ≤ t and nt ≤ δ, the scalar part of ‖D‖_2 ≤ δ."
+    },
+    {
+      "id": "run.queries_inside",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.queries_inside",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "Every request lies in [0, δ/n] and has a positive tolerance."
+    },
+    {
+      "id": "run.tolerance_upper",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.tolerance_upper",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "Every requested accuracy is at most δ/(512n)."
+    },
+    {
+      "id": "run.tolerance_lt_one",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.tolerance_lt_one",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "For δ < 1/2 every requested accuracy is below 1."
+    },
+    {
+      "id": "run.radius_lt_one",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.radius_lt_one",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "For δ < 1/2, h < 1, as Proposition 3.1 requires."
+    },
+    {
+      "id": "run.calls_exact",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.calls_exact",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "The request log has exactly 3 + 8j entries after j refinements."
+    },
+    {
+      "id": "run.calls_le",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.calls_le",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "At most 3 + 8K requests."
+    },
+    {
+      "id": "run.gap_scale",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.gap_scale",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "h^2/(2^20 n^4) > 2^-34 δ^2 n^-12 at the returned radius: the scalar step of (38)."
+    },
+    {
+      "id": "run.min_accuracy",
+      "component": "algorithm2",
+      "field": "KE02.Algorithm2Outcome.min_accuracy",
+      "proofs": [
+        "KE02.algorithm2_outcome"
+      ],
+      "scope": "(40): every requested accuracy exceeds δ/(2^16 K n^4)."
+    }
+  ],
+  "exact_checks": [
+    {
+      "id": "C01",
+      "family": "C01",
+      "source": "verification/core/check_constants.py",
+      "function": "fam_c01",
+      "scope": "Σj = n(n+1)/2 and Σjn = n^2(n+1)/2; the slope width (n^3 - n)/2 < n^3 for n ≤ 10^4; the identities (8) and (10) on exact sorted spectra with n ≤ 9; and (9), midpoint convexity and 0 ≤ S_h(t) ≤ (n^3 - n)/2 on 400 exact diagonal instances with n ≤ 8.",
+      "limitation": "Finite ranges and diagonal instances; Lemma 2.1 for every Hermitian T is proved in the paper."
+    },
+    {
+      "id": "C02",
+      "family": "C02",
+      "source": "verification/core/check_constants.py",
+      "function": "fam_c02",
+      "scope": "(16) and (17) on a grid; Example 4.1 exactly; the crossing points 0.06, 0.08, 0.10 and an exact bracket of S_0.006(0.08) that rounds to 1.8541 (Example 2.3); for Example 3.1, ‖H‖_2 < 1, nonzero couplings, the two eigenvalues to 10^-12 and |λ - μ| < γ; for Example 3.2, τ ≈ 0.0358 and the column L_k ≤ τ for the printed values L_k.",
+      "limitation": "Only the listed claims; the printed eigenvectors, residuals and leakages of Examples 3.1 and 3.2 are not recomputed."
+    },
+    {
+      "id": "C03",
+      "family": "C03",
+      "source": "verification/core/check_constants.py",
+      "function": "fam_c03",
+      "scope": "n(1/(2√n))^2 = 1/4, 3/4, (3/4)/2 = 3/8 and √(3/8) > 1/2; the projector-gap identity; the whole of Step 1 on exact n x 2 matrices with orthonormal rational columns.",
+      "limitation": "Fixed exact instances; Step 1 for all matrices is proved in the paper."
+    },
+    {
+      "id": "C04",
+      "family": "C04",
+      "source": "verification/core/check_constants.py",
+      "function": "fam_c04",
+      "scope": "The discrete Wronskian identity (22) in telescoping form for arbitrary vectors and for exact eigenpairs; the bound 1/2 for orthonormal rational pairs.",
+      "limitation": "Fixed exact instances; the identity and the bound for all real sequences are Lean theorems."
+    },
+    {
+      "id": "C05",
+      "family": "C05",
+      "source": "verification/core/check_constants.py",
+      "function": "fam_c05",
+      "scope": "τ^2 = 16nγ, τ ≤ 1/(4√n), cases (a) and (c) including the determinant step from the three-term recurrence, 5γ/τ^2 = 5/(16n) and (n - 1)·5/(16n) < 5/16 < 1/2 for n ≤ 10^4.",
+      "limitation": "Finite range of n and fixed instances; the existence of the cut is proved in the paper."
+    },
+    {
+      "id": "C06",
+      "family": "C06",
+      "source": "verification/core/check_constants.py",
+      "function": "fam_c06",
+      "scope": "The residual of w_1, the commutator [H, P_L]w and its bound √2 τ, 2√n(γ/2 + √2 τ) ≤ 16n√γ, and the X-responses at most k and at least k + 1.",
+      "limitation": "Fixed exact instances; the matrix estimates of Step 4 are proved in the paper."
+    },
+    {
+      "id": "C07",
+      "family": "C07",
+      "source": "verification/core/check_constants.py",
+      "function": "fam_c07",
+      "scope": "H - H̃ = AQ + QA - QAQ, H̃v_i = ((λ+μ)/2)v_i, ‖AQ‖_F^2 = Σ_i ‖Av_i‖^2, rank at most two and ‖M‖_* ≤ √2 ‖M‖_F on exact instances; 3√2·√2·16 = 96; (27) for an exact diagonal H̃ with a repeated eigenvalue.",
+      "limitation": "Fixed exact instances; the matrix statements of Lemma 3.2 are proved in the paper."
+    },
+    {
+      "id": "C08",
+      "family": "C08",
+      "source": "verification/core/check_constants.py",
+      "function": "fam_c08",
+      "scope": "0 < h ≤ 1 gives γ ≤ 1/(256n^2); the transfer coefficient 1 + 2 + 1 = 4; (4n/h)·96n√γ = 384/1024 = 3/8 and 5/8 > 1/2, symbolically, for n ≤ 10^4 at h = 1 and on 2000 sampled chains; (28) on exact diagonal pairs.",
+      "limitation": "Finite ranges and instances; the matrix statements are proved in the paper."
+    },
+    {
+      "id": "C09",
+      "family": "C09",
+      "source": "verification/core/check_constants.py",
+      "function": "fam_c09",
+      "scope": "The weight inequality of the proof of Lemma 4.1 with its extremal value 4/3, completely (both sides are piecewise linear in (x - t)/h and every breakpoint is checked); the representation of S_h(t) as an integral of the weights, (29), its sharpness, and (30) with replies within r/256, on random convex piecewise-linear F.",
+      "limitation": "Random convex piecewise-linear functions; (29) and (30) for every convex F are proved in Lean and in the paper."
+    },
+    {
+      "id": "C10",
+      "family": "C10",
+      "source": "verification/core/check_constants.py",
+      "function": "fam_c10",
+      "scope": "K_b least with (3/2)^(K_b) ≥ 16n^3 by two methods, (2/3)^(K_b) n^3 ≤ 1/16 and s_(K_b) < 5/32 for n ≤ 10^4; the closed form of the iteration; 5/32 + 2/64 < 1/2; (31); (32) reduced to (3/2)^(K_b - 1) < 16n^3; five evaluations per refinement.",
+      "limitation": "Finite range of n."
+    },
+    {
+      "id": "C11",
+      "family": "C11",
+      "source": "verification/core/check_constants.py",
+      "function": "fam_c11",
+      "scope": "(34) for 0 < θ ≤ 1/2; (35) and the three secant orderings of its proof for 0 < θ ≤ 1/4; sharpness of 1/2; the error 1/64 from the tolerance 2θh'/256; and (36), on random convex piecewise-linear F.",
+      "limitation": "Random convex piecewise-linear functions; the statements for every convex F are proved in Lean and in the paper."
+    },
+    {
+      "id": "C12",
+      "family": "C12",
+      "source": "verification/core/check_constants.py",
+      "function": "fam_c12",
+      "scope": "For 2 ≤ n ≤ 10^4: K by doubling equals the least K with 2^K ≥ 16n^3 and ⌈log_2(16n^3)⌉, 2^K < 32n^3, θ = 1/(4K) ≤ 1/28, the potential bound below 1/8, θ/32 ≤ 1/128, 1/8 + 1/128 + 1/64 < 1/2, (1/2 - θ)^K > 1/(64n^3), h > δ/(128n^4), (40) and eight evaluations per refinement; Bernoulli's bound for K ≤ 1024; the reduction of h^2/(2^20 n^4) > 2^-34 δ^2 n^-12 (128^2·2^20 = 2^34) and sampled instances; and (5).",
+      "limitation": "Finite ranges of n and K."
+    },
+    {
+      "id": "C13",
+      "family": "C13",
+      "source": "verification/core/check_constants.py",
+      "function": "fam_c13",
+      "scope": "Algorithms 1 and 2 run as transcripts on exact instances (diagonal T, whose gap is computed exactly, and convex piecewise-linear F satisfying (9), including kink trees that force up to 8 refinements), with exact replies and with replies within the tolerances: termination within K_b and K refinements, 3 + 5j and 3 + 8j requests, nesting in [0, δ/n], (30) and (36) along the run, (31) and (37), (40), and gap(T + tX) > h^2/(2^20 n^4) > 2^-34 δ^2 n^-12 for diagonal T.",
+      "limitation": "Fixed exact instances; diagonal T is the only case in which the gap is computed."
+    },
+    {
+      "id": "C14",
+      "family": "C14",
+      "source": "verification/core/check_constants.py",
+      "function": "fam_c14",
+      "scope": "η = ε/Σj = 2ε/(n(n+1)), n/η ≤ (n/ε)^3, R = 2^k by doubling with 8n/η ≤ R < 16n/η, n ≤ R and 4n/R ≤ η/2; 2^x - 1 ≤ x and 1 - 2^-x ≤ x at every rational x = p/q in [0, 1] with q ≤ 40; rn/R < 4n/R for 0 < r < 4; total error Σ_j jη/2 = ε/2 ≤ ε.",
+      "limitation": "Finite ranges and rational sample points."
+    },
+    {
+      "id": "A01",
+      "family": "A01",
+      "source": "verification/core/check_appendix_a.py",
+      "function": "fam_a01",
+      "scope": "The recurrence P_0 = 1, P_1 = z + 2 + a_1, P_i = (z + 2 + a_i)P_(i-1) - c_(i-1)P_(i-2) equals det(zI + 2I + A) as an exact polynomial, with the determinant computed independently by rational elimination and interpolation, and for n ≤ 7 also by the permutation expansion: 48 real symmetric instances (n ≤ 8), 32 complex Hermitian instances with c_i = (Re A_(i,i+1))^2 + (Im A_(i,i+1))^2, and scaled Kac matrices.",
+      "limitation": "Fixed exact instances; for every real tridiagonal matrix the identity is a Lean theorem, and the complex Hermitian case is proved in the paper."
+    },
+    {
+      "id": "A02",
+      "family": "A02",
+      "source": "verification/core/check_appendix_a.py",
+      "function": "fam_a02",
+      "scope": "P(z) = E(z^2) + zO(z^2); G(P)(z) = E(-z)^2 + zO(-z)^2 = ∏(z + r_j^2) and k steps give ∏(z + r_j^(2^k)), monic, for random rational roots with mixed signs, zeros and ties; the coefficient of z^(n-j) is e_j.",
+      "limitation": "Random rational root lists; the identities for all real roots are proved in Lean."
+    },
+    {
+      "id": "A03",
+      "family": "A03",
+      "source": "verification/core/check_appendix_a.py",
+      "function": "fam_a03",
+      "scope": "For r_1 ≥ ... ≥ r_n > 0 with ties and R = 2^k, k ≤ 6: e_0 = 1, e_j > 0, p_j ≤ e_j ≤ C(n,j) p_j ≤ 2^n p_j, and (43) in R-th-power form.",
+      "limitation": "Fixed root lists and k ≤ 6; the bounds for all roots are proved in Lean."
+    },
+    {
+      "id": "A04",
+      "family": "A04",
+      "source": "verification/core/check_appendix_a.py",
+      "function": "fam_a04",
+      "scope": "The complete pipeline: Gershgorin ‖A‖_2 < 2, the integer-scaled recurrence, P(z) = ∏(z + r_j) where the spectrum is known, η, R by doubling, k Graeffe steps, (e_j/e_(j-1))^(1/R) by k verified square roots, (43), |r̂_j - r_j| ≤ 4n/R, the index-wise matching with |λ̂_j - λ_j| ≤ η/2 and the weighted error at most ε, on scaled Clement matrices, Pythagorean 2 x 2 blocks, diagonal matrices with repeated eigenvalues and generic rational matrices with exact Sturm brackets; R up to 2^13.",
+      "limitation": "Fixed instances; the oracle for every input and its cost are proved in the paper."
+    }
+  ],
+  "numerics": [
+    {
+      "id": "families",
+      "paper_labels": [
+        "tab:test-families"
+      ],
+      "files": [
+        "ke02num/core.py"
+      ],
+      "scope": "make_matrix generates the six test families of Table 1."
+    },
+    {
+      "id": "adaptive",
+      "paper_labels": [
+        "tab:certified-results",
+        "fig:certified-iterations",
+        "fig:certified-gaps",
+        "fig:certified-runtime"
+      ],
+      "files": [
+        "run_adaptive.py",
+        "ke02num/hybrid.py",
+        "data/adaptive.jsonl"
+      ],
+      "scope": "The certified pipeline of Section 5: a double-precision selection path, rigorous Sturm enclosures of the centred slope variation along it, the first certified stop j_*, the certificates g_S and g_dir and the run times (Table 2, Figures 4 to 6). The selection path is not certified."
+    },
+    {
+      "id": "baselines",
+      "paper_labels": [
+        "fig:certified-baselines"
+      ],
+      "files": [
+        "run_sweep.py",
+        "run_direct_s.py",
+        "data/sweep.jsonl",
+        "data/directS_fp.jsonl"
+      ],
+      "scope": "The double-precision baseline sweep and direct centred tests behind the distributions of Figure 7; its stars use the certified pipeline of the item adaptive. Numerical comparisons, not gap certificates."
+    },
+    {
+      "id": "fallback",
+      "paper_labels": [],
+      "files": [
+        "run_fallback.py"
+      ],
+      "scope": "Runs all K refinements of Algorithm 2 with rigorously decided endpoint comparisons and prints a summary; Section 5 states that its runs are not reported."
+    }
+  ],
+  "numbered_results": [
+    {
+      "labels": [
+        "thm:main"
+      ],
+      "environment": "theorem",
+      "number": "1.1",
+      "page": 2,
+      "section": "1",
+      "source": "paper/main.tex",
+      "title": "Main theorem",
+      "coverage": "formalized_scalar_part",
+      "lean_targets": [
+        "algorithm2.K_doubling",
+        "algorithm2.run",
+        "run.returns",
+        "run.window",
+        "run.budget",
+        "run.radius_upper",
+        "run.radius_lt_one",
+        "run.queries_inside",
+        "run.tolerance_upper",
+        "run.tolerance_lt_one",
+        "run.min_accuracy",
+        "run.calls_le",
+        "run.gap_scale",
+        "localConstants.gap_chain",
+        "algorithm2.main_bound_form"
+      ],
+      "exact_checks": [
+        "C12",
+        "C13"
+      ],
+      "numerics": [
+        "adaptive"
+      ],
+      "covered": "The scalar facts its proof uses about Algorithm 2, for every n ≥ 1, δ > 0, convex F with (9) and every reply function that meets the requested accuracies: the run returns t with [t - h, t + h] ⊆ [0, δ/n], so 0 ≤ t and nt ≤ δ; it makes at most 3 + 8K requests, all at points of [0, δ/n] with accuracies δ/(2^16 K n^4) < ε ≤ δ/(512n), hence ε < 1 for δ < 1/2; K is found by doubling; h ≤ δ/(2n) < 1 and h^2/(2^20 n^4) > 2^-34 δ^2 n^-12, which Proposition 3.1 turns into the gap bound; and the second inequality of (5).",
+      "not_covered": "‖D‖_2 ≤ δ and the gap bound as matrix statements, which need Proposition 3.1 and spectral theory; that F is the spectral function of T + tX, and Lemma 2.1; that the oracle of Lemma 4.3 and Appendix A produces replies meeting the accuracy premise; the model of computation and every operation count, including O(n[1 + log(n/δ)]^3)."
+    },
+    {
+      "labels": [
+        "rem:real"
+      ],
+      "environment": "remark",
+      "number": "1.1",
+      "page": 4,
+      "section": "1",
+      "source": "paper/main.tex",
+      "title": "Reduction to real symmetric matrices",
+      "coverage": "written_proof_only",
+      "lean_targets": [],
+      "exact_checks": [],
+      "numerics": [],
+      "covered": "No Lean declaration or exact check is assigned.",
+      "not_covered": "The diagonal unitary gauge S with S*TS real symmetric and S*XS = X, and the resulting invariance of eigenvalues, gaps and norms."
+    },
+    {
+      "labels": [
+        "ex:tails"
+      ],
+      "environment": "example",
+      "number": "2.1",
+      "page": 5,
+      "section": "2",
+      "source": "paper/main.tex",
+      "title": "Tail sums and spectral spread",
+      "coverage": "exact_cross_check_only",
+      "lean_targets": [],
+      "exact_checks": [
+        "C01"
+      ],
+      "numerics": [],
+      "covered": "The tail-sum identity (10), of which the displayed decomposition is the case n = 3, and the identity (8), on exact sorted spectra with n ≤ 9.",
+      "not_covered": "The interpretation of the slope variation."
+    },
+    {
+      "labels": [
+        "lem:convex"
+      ],
+      "environment": "lemma",
+      "number": "2.1",
+      "page": 5,
+      "section": "2",
+      "source": "paper/main.tex",
+      "title": "Properties of the spectral function",
+      "coverage": "exact_cross_check_only",
+      "lean_targets": [],
+      "exact_checks": [
+        "C01"
+      ],
+      "numerics": [],
+      "covered": "Σj = n(n+1)/2 and Σjn = n^2(n+1)/2, the identities (8) and (10) on exact sorted spectra, and (9), midpoint convexity and 0 ≤ S_h(t) ≤ (n^3 - n)/2 on 400 exact diagonal instances.",
+      "not_covered": "The lemma for every Hermitian T: monotonicity, convexity, the secant bounds (9) and the variational representation (10) from Ky Fan's maximum principle. Wherever Lean uses these properties, convexity of F and (9) are explicit premises."
+    },
+    {
+      "labels": [
+        "def:defect"
+      ],
+      "environment": "definition",
+      "number": "2.1",
+      "page": 6,
+      "section": "2",
+      "source": "paper/main.tex",
+      "title": "Centered slope variation",
+      "coverage": "formalized_in_full",
+      "lean_targets": [
+        "endpoint.centered_nonneg"
+      ],
+      "exact_checks": [
+        "C01",
+        "C02"
+      ],
+      "numerics": [],
+      "covered": "(13) is the Lean definition KE02.centeredVariation, and S_h(t) ≥ 0 is proved for every convex F and h > 0.",
+      "not_covered": "Convexity of the spectral function F, Lemma 2.1, which enters as a premise."
+    },
+    {
+      "labels": [
+        "ex:collision"
+      ],
+      "environment": "example",
+      "number": "2.2",
+      "page": 7,
+      "section": "2",
+      "source": "paper/main.tex",
+      "title": "A collision produces a corner",
+      "coverage": "exact_cross_check_only",
+      "lean_targets": [],
+      "exact_checks": [
+        "C02"
+      ],
+      "numerics": [],
+      "covered": "(16) and (17) exactly: the closed form of F and the triangular peak of S_h for several h on a grid of centres.",
+      "not_covered": "Figure 1, which is a plot."
+    },
+    {
+      "labels": [
+        "ex:tridiagonal-defect"
+      ],
+      "environment": "example",
+      "number": "2.3",
+      "page": 7,
+      "section": "2",
+      "source": "paper/main.tex",
+      "title": "A tridiagonal matrix with avoided crossings",
+      "coverage": "exact_cross_check_only",
+      "lean_targets": [],
+      "exact_checks": [
+        "C02"
+      ],
+      "numerics": [],
+      "covered": "The crossing points 0.06, 0.08 and 0.10 of the diagonal branches, and an exact bracket of S_0.006(0.08) by Sturm bisection, which rounds to the value 1.8541 stated for Figure 2.",
+      "not_covered": "The plotted curves of Figure 2."
+    },
+    {
+      "labels": [
+        "prop:bridge"
+      ],
+      "environment": "proposition",
+      "number": "3.1",
+      "page": 8,
+      "section": "3",
+      "source": "paper/main.tex",
+      "title": "Local gap certificate",
+      "coverage": "formalized_scalar_part",
+      "lean_targets": [
+        "localConstants.gamma_range",
+        "localConstants.aux_variation",
+        "localConstants.transfer",
+        "localConstants.constant",
+        "localConstants.chain"
+      ],
+      "exact_checks": [
+        "C08"
+      ],
+      "numerics": [
+        "adaptive"
+      ],
+      "covered": "The scalar steps of the proof: 0 < h ≤ 1 gives 0 < γ ≤ 1/(256n^2) for γ = h^2/(2^20 n^4); the quotient in (27) is (13); (28) at t - h, t and t + h gives S_h(t) ≥ S_h^aux(t) - (4n/h)N for arbitrary real functions; 1 - 384n^2 √γ/h = 5/8 > 1/2; and the complete scalar chain from S^aux ≥ 1, N ≤ 96n√γ and the three bounds |F - G| ≤ nN to S_h(t) > 1/2.",
+      "not_covered": "The proposition itself: the localized vectors and the auxiliary matrix of Lemmas 3.1 and 3.2, the operator-nuclear duality (28), and the conclusion gap(H(t)) > h^2/(2^20 n^4)."
+    },
+    {
+      "labels": [
+        "ex:localization"
+      ],
+      "environment": "example",
+      "number": "3.1",
+      "page": 9,
+      "section": "3",
+      "source": "paper/main.tex",
+      "title": "An illustrative example of a small-leakage cut",
+      "coverage": "exact_cross_check_only",
+      "lean_targets": [],
+      "exact_checks": [
+        "C02"
+      ],
+      "numerics": [],
+      "covered": "‖H‖_2 < 1 by row sums, nonzero couplings, and the two eigenvalues -5.173792·10^-6 and 4.739763·10^-6 to 10^-12, adjacent in the spectrum, with |λ - μ| < γ.",
+      "not_covered": "The printed eigenvectors u_1, u_2, v_1, v_2, the residuals and the X-response 5.0000."
+    },
+    {
+      "labels": [
+        "lem:localization"
+      ],
+      "environment": "lemma",
+      "number": "3.1",
+      "page": 9,
+      "section": "3",
+      "source": "paper/main.tex",
+      "title": "Spatially separated approximate eigenvectors",
+      "coverage": "formalized_scalar_part",
+      "lean_targets": [
+        "localConstants.discarded_rows",
+        "localConstants.direction_gap",
+        "localConstants.tau_le",
+        "localConstants.case_a",
+        "localConstants.case_c",
+        "localConstants.total_change",
+        "localConstants.truncation",
+        "wronskian.identity",
+        "wronskian.partial_inner",
+        "wronskian.bound"
+      ],
+      "exact_checks": [
+        "C03",
+        "C04",
+        "C05",
+        "C06"
+      ],
+      "numerics": [],
+      "covered": "The discrete Wronskian identity (22) for the coordinate recurrence and the two bounds of Step 2; the real inequalities of Steps 1, 3 and 4: n(1/(2√n))^2 = 1/4, √(3/8) > 1/2, τ ≤ 1/(4√n), the bounds of cases (a) and (c), 5nγ/τ^2 = 5/16 < 1/2 and 2√n(γ/2 + √2 τ) ≤ 16n√γ.",
+      "not_covered": "The existence of the cut and of the localized vectors: the choice of p and q, the path argument over large and small rows, the projector and commutator estimates as matrix statements and the X-response bound. The Wronskian identity is formalized for the coordinate recurrence, not derived from a matrix-vector product."
+    },
+    {
+      "labels": [
+        "rem:localization-example"
+      ],
+      "environment": "example",
+      "number": "3.2",
+      "page": 11,
+      "section": "3",
+      "source": "paper/main.tex",
+      "title": "Identifying the small-leakage cut in Example 3.1",
+      "coverage": "exact_cross_check_only",
+      "lean_targets": [],
+      "exact_checks": [
+        "C02"
+      ],
+      "numerics": [],
+      "covered": "τ = 4√(nγ) rounds to 0.0358 for n = 8 and γ = 10^-5, and the column L_k ≤ τ of the table agrees with the printed values L_k.",
+      "not_covered": "The printed matrix entries, determinants and leakages L_k themselves are not recomputed."
+    },
+    {
+      "labels": [
+        "rem:tridiagonal-localization"
+      ],
+      "environment": "remark",
+      "number": "3.1",
+      "page": 12,
+      "section": "3",
+      "source": "paper/main.tex",
+      "title": "Role of the tridiagonal structure",
+      "coverage": "written_proof_only",
+      "lean_targets": [],
+      "exact_checks": [],
+      "numerics": [],
+      "covered": "No Lean declaration or exact check is assigned.",
+      "not_covered": "Where the tridiagonal assumption enters the proof."
+    },
+    {
+      "labels": [
+        "lem:auxiliary"
+      ],
+      "environment": "lemma",
+      "number": "3.2",
+      "page": 12,
+      "section": "3",
+      "source": "paper/main.tex",
+      "title": "A nearby matrix with large slope variation",
+      "coverage": "formalized_scalar_part",
+      "lean_targets": [
+        "localConstants.nuclear",
+        "localConstants.aux_variation"
+      ],
+      "exact_checks": [
+        "C07"
+      ],
+      "numerics": [],
+      "covered": "3√2 (a_1^2 + a_2^2)^(1/2) ≤ 96n√γ when 0 ≤ a_i ≤ 16n√γ, and the identification of the quotient in (27) with (13).",
+      "not_covered": "The auxiliary matrix H̃, the nuclear-norm bound (26) as a matrix statement and the supporting-slope argument for (27)."
+    },
+    {
+      "labels": [
+        "alg:selection-basic"
+      ],
+      "environment": "algorithm",
+      "number": "1",
+      "page": 14,
+      "section": "4",
+      "source": "paper/main.tex",
+      "title": "Basic selection of a perturbation parameter",
+      "coverage": "formalized_scalar_part",
+      "lean_targets": [
+        "basicSelector.step",
+        "basicSelector.Kb_spec",
+        "endpoint.ties_left"
+      ],
+      "exact_checks": [
+        "C10",
+        "C13"
+      ],
+      "numerics": [],
+      "covered": "One refinement, with its five evaluation points, the tolerance (h/4)/256 and the selection with ties to the left, is the statement basicSelector.step; K_b is the least natural number with (3/2)^(K_b) ≥ 16n^3.",
+      "not_covered": "The transcript of Algorithm 1 as a whole, the search for K_b by repeated multiplication, and the claim that its last line is not reached (Theorem 4.1)."
+    },
+    {
+      "labels": [
+        "ex:selection"
+      ],
+      "environment": "example",
+      "number": "4.1",
+      "page": 14,
+      "section": "4",
+      "source": "paper/main.tex",
+      "title": "One step of interval selection",
+      "coverage": "exact_cross_check_only",
+      "lean_targets": [],
+      "exact_checks": [
+        "C02"
+      ],
+      "numerics": [],
+      "covered": "S_0.04(0.1) = 1, the window arithmetic and the vanishing of both child variations, exactly.",
+      "not_covered": "The closing sentence about the selection rule in general."
+    },
+    {
+      "labels": [
+        "lem:defect-contraction",
+        "lem:inexact-contraction"
+      ],
+      "environment": "lemma",
+      "number": "4.1",
+      "page": 15,
+      "section": "4",
+      "source": "paper/main.tex",
+      "title": "Contraction of centered slope variation",
+      "coverage": "formalized_in_full",
+      "lean_targets": [
+        "basicSelector.weights",
+        "basicSelector.weights_attained",
+        "basicSelector.children_sum",
+        "basicSelector.contraction",
+        "basicSelector.estimate_error",
+        "basicSelector.step"
+      ],
+      "exact_checks": [
+        "C09"
+      ],
+      "numerics": [],
+      "covered": "(29) for every convex F and h > 0; the weight inequality of the proof and its sharpness; the estimate error 1/64 for the tolerance r/256; and (30) for every refinement of Algorithm 1, as a statement about one refinement with arbitrary replies within (h/4)/256 and ties to the left.",
+      "not_covered": "Convexity of the spectral function F, Lemma 2.1, which enters as a premise. The measure representation used in the paper's proof is not formalized; Lean proves (29) from three-point convexity inequalities."
+    },
+    {
+      "labels": [
+        "thm:selection-basic"
+      ],
+      "environment": "theorem",
+      "number": "4.1",
+      "page": 15,
+      "section": "4",
+      "source": "paper/main.tex",
+      "title": "Basic iteration bound and certified scale",
+      "coverage": "formalized_scalar_part",
+      "lean_targets": [
+        "basicSelector.initial",
+        "basicSelector.Kb_spec",
+        "basicSelector.Kb_ceil",
+        "basicSelector.first_term",
+        "basicSelector.iterate",
+        "basicSelector.geometric",
+        "basicSelector.final",
+        "basicSelector.stopping_constants",
+        "basicSelector.calls",
+        "basicSelector.radius_lt_one"
+      ],
+      "exact_checks": [
+        "C10",
+        "C13"
+      ],
+      "numerics": [],
+      "covered": "S_h(t) < n^3 from (9); K_b least and equal to ⌈log_(3/2)(16n^3)⌉; (2/3)^(K_b) n^3 ≤ 1/16; for every real sequence obeying (30) with s_0 < n^3, the iterated bound, the geometric sum below 3/32 and s_(K_b) < 5/32; 5/32 + 2/64 < 1/2; the arithmetic fact 3 + 5j ≤ 3 + 5K_b; and (δ/(2n)) 4^-j ≤ δ/(2n) < 1.",
+      "not_covered": "The run of Algorithm 1: termination, (31), the evaluation count, and the gap bound, which uses Proposition 3.1 and ‖tX‖_2 = nt."
+    },
+    {
+      "labels": [
+        "rem:basic-selection-scale"
+      ],
+      "environment": "remark",
+      "number": "4.1",
+      "page": 16,
+      "section": "4",
+      "source": "paper/main.tex",
+      "title": "A lower bound on the window radius",
+      "coverage": "formalized_scalar_part",
+      "lean_targets": [
+        "basicSelector.radius"
+      ],
+      "exact_checks": [
+        "C10"
+      ],
+      "numerics": [],
+      "covered": "(32) for every radius (δ/(2n)) 4^-j with j ≤ K_b, n ≥ 1, δ > 0 and α = log_(3/2) 4.",
+      "not_covered": "That the returned radius has this form, which comes from the run of Algorithm 1 (Theorem 4.1)."
+    },
+    {
+      "labels": [
+        "alg:selection"
+      ],
+      "environment": "algorithm",
+      "number": "2",
+      "page": 17,
+      "section": "4",
+      "source": "paper/main.tex",
+      "title": "Improved selection of a separating perturbation",
+      "coverage": "formalized_in_full",
+      "lean_targets": [
+        "algorithm2.K_spec",
+        "algorithm2.K_doubling",
+        "algorithm2.theta_range",
+        "endpoint.child_windows",
+        "endpoint.points_of_children",
+        "endpoint.ties_left",
+        "algorithm2.run",
+        "run.returns",
+        "run.state_eq",
+        "run.earlier_tests_fail",
+        "run.returned_test_passes",
+        "run.calls_exact"
+      ],
+      "exact_checks": [
+        "C12",
+        "C13"
+      ],
+      "numerics": [
+        "adaptive",
+        "fallback"
+      ],
+      "covered": "Algorithm 2 is the Lean transcript KE02.alg2Run for an arbitrary reply function, line by line: K least with 2^K ≥ 16n^3 and found by doubling, θ = 1/(4K), the three initial requests and the seven plus one requests of each refinement with their tolerances, the selection with ties to the left and the stopping test. Under the accuracy premise and for convex F with (9), the run executes a return statement at the first successful test, so the last line is not reached, after exactly 3 + 8j requests for j refinements.",
+      "not_covered": "Convexity of the spectral function and (9), from Lemma 2.1, are premises; that the replies come from the oracle of Lemma 4.3 is not formalized."
+    },
+    {
+      "labels": [
+        "lem:potential-contraction",
+        "lem:potential-inexact"
+      ],
+      "environment": "lemma",
+      "number": "4.2",
+      "page": 17,
+      "section": "4",
+      "source": "paper/main.tex",
+      "title": "Contraction of endpoint slope variation",
+      "coverage": "formalized_in_full",
+      "lean_targets": [
+        "endpoint.children_sum",
+        "endpoint.contraction",
+        "endpoint.estimate_error",
+        "endpoint.potential_step",
+        "run.potential_step"
+      ],
+      "exact_checks": [
+        "C11"
+      ],
+      "numerics": [],
+      "covered": "(35) for every convex F, 0 < θ ≤ 1/4 and h > 0, with the sum inequality of the proof; the estimate error 1/64 for the tolerance 2θh'/256; and (36), for one refinement with arbitrary replies and at every performed refinement of every run of Algorithm 2 whose replies meet the requested accuracies.",
+      "not_covered": "Convexity of the spectral function F, Lemma 2.1, which enters as a premise."
+    },
+    {
+      "labels": [
+        "thm:selection"
+      ],
+      "environment": "theorem",
+      "number": "4.2",
+      "page": 18,
+      "section": "4",
+      "source": "paper/main.tex",
+      "title": "Improved constructive spectral separation",
+      "coverage": "formalized_scalar_part",
+      "lean_targets": [
+        "algorithm2.K_ceil_log",
+        "algorithm2.K_upper",
+        "algorithm2.bernoulli",
+        "algorithm2.LK_bound",
+        "algorithm2.stopping_constants",
+        "algorithm2.midpoint_estimate_error",
+        "algorithm2.run",
+        "algorithm2.premises_satisfiable",
+        "run.refinements_le",
+        "run.radius_formula",
+        "run.windows_inside",
+        "run.windows_nested",
+        "run.initial_potential",
+        "run.potential_bound",
+        "run.potential_final",
+        "run.estimate_accuracy",
+        "run.centered_lt_half",
+        "run.radius_lower",
+        "run.radius_upper",
+        "run.window",
+        "run.budget",
+        "run.queries_inside",
+        "run.calls_le",
+        "run.radius_lt_one",
+        "run.gap_scale",
+        "endpoint.points_in_parent",
+        "localConstants.gap_chain"
+      ],
+      "exact_checks": [
+        "C12",
+        "C13"
+      ],
+      "numerics": [
+        "adaptive",
+        "baselines"
+      ],
+      "covered": "For every n ≥ 1, δ > 0, convex F with (9) and every reply function that meets the requested accuracies: termination after at most K = ⌈log_2(16n^3)⌉ refinements; (37), that is S_h(t) < 1/2, [t - h, t + h] ⊆ [0, δ/n] and h > δ/(128n^4); at most 3 + 8K evaluations, all at points of [0, δ/n]; nested windows and the potential bounds of the proof; the stopping-test error θ/32 ≤ 1/128 and 1/8 + 1/128 + 1/64 < 1/2; Bernoulli's inequality and L_K > δ/(64n^4); h ≤ δ/(2n) < 1, 0 ≤ t and nt ≤ δ; and the scalar inequality h^2/(2^20 n^4) > 2^-34 δ^2 n^-12 used for (38). The premises are satisfiable.",
+      "not_covered": "(38) itself, which applies Proposition 3.1, and ‖D‖_2 = nt; that F is the spectral function, whose convexity and secant bounds (9) are Lemma 2.1."
+    },
+    {
+      "labels": [
+        "rem:selection-scale"
+      ],
+      "environment": "remark",
+      "number": "4.2",
+      "page": 19,
+      "section": "4",
+      "source": "paper/main.tex",
+      "title": "Improvement over the basic selector",
+      "coverage": "written_proof_only",
+      "lean_targets": [],
+      "exact_checks": [],
+      "numerics": [],
+      "covered": "No Lean declaration or exact check is assigned; the quantities it compares are those of Lemma 4.2 and Theorems 4.1 and 4.2.",
+      "not_covered": "The comparison of the two selectors."
+    },
+    {
+      "labels": [
+        "lem:oracle"
+      ],
+      "environment": "lemma",
+      "number": "4.3",
+      "page": 19,
+      "section": "4",
+      "source": "paper/main.tex",
+      "title": "Spectral-function oracle",
+      "coverage": "formalized_scalar_part",
+      "lean_targets": [
+        "continuant.det_char",
+        "graeffe.iterate",
+        "coefficients.bounds",
+        "rootExtraction.steps_least",
+        "rootExtraction.steps_doubling",
+        "rootExtraction.steps_choice",
+        "rootExtraction.weighted_error",
+        "rootExtraction.pipeline",
+        "rootExtraction.sum_error"
+      ],
+      "exact_checks": [
+        "C14",
+        "A04"
+      ],
+      "numerics": [],
+      "covered": "The algebra and arithmetic of Appendix A that the oracle uses: the recurrence ends in det(zI + 2I + A); k Graeffe steps give ∏(z + r_j^(2^k)); p_j ≤ e_j ≤ 2^n p_j; k least with 2^k η ≥ 8n and found by doubling, with 4n/R ≤ η/2; and, for roots in (0, 4), the index-wise matching with error η/2 in every eigenvalue and weighted error at most ε. The bound n(n+1)η/2 in the remark after the lemma is also formalized.",
+      "not_covered": "The lemma as a statement about an algorithm: that the procedure applied to F(t) = Σ_j jλ_j(T + tX) meets the accuracy ε, P(z) = ∏(z + r_j) (spectral theorem), the complex Hermitian c_i, balanced product trees, Fourier transforms and roots of unity, the arithmetic model and the cost O(n[1 + log(n/ε)]^2)."
+    }
+  ],
+  "supporting_steps": [
+    {
+      "label": "eq:main",
+      "kind": "equation",
+      "number": "5",
+      "page": 2,
+      "section": "1",
+      "source": "paper/main.tex",
+      "title": "The two forms of the gap bound in Theorem 1.1",
+      "lean_targets": [
+        "algorithm2.main_bound_form"
+      ],
+      "exact_checks": [
+        "C12"
+      ],
+      "covered": "2^-34 δ^2 n^-12 ≥ 2^-34 (δ/n)^12 for n ≥ 1 and 0 < δ < 1.",
+      "not_covered": "The gap bound itself."
+    },
+    {
+      "label": "eq:wronskian",
+      "kind": "equation",
+      "number": "22",
+      "page": 10,
+      "section": "3",
+      "source": "paper/main.tex",
+      "title": "The discrete Wronskian identity",
+      "lean_targets": [
+        "wronskian.identity",
+        "wronskian.partial_inner",
+        "wronskian.bound"
+      ],
+      "exact_checks": [
+        "C04"
+      ],
+      "covered": "(22) for every i ≤ n and the two bounds of Step 2, for real sequences satisfying the coordinate equations.",
+      "not_covered": "Its derivation from the matrix eigenvector equations."
+    },
+    {
+      "label": "eq:nuclear",
+      "kind": "equation",
+      "number": "28",
+      "page": 13,
+      "section": "3",
+      "source": "paper/main.tex",
+      "title": "The operator-nuclear duality bound",
+      "lean_targets": [
+        "localConstants.transfer"
+      ],
+      "exact_checks": [
+        "C08"
+      ],
+      "covered": "Taken as a hypothesis at t - h, t and t + h, (28) gives S_h(t) ≥ S_h^aux(t) - (4n/h)N.",
+      "not_covered": "(28) itself: the variational representation and operator-nuclear duality."
+    },
+    {
+      "label": "eq:endpoint-slope",
+      "kind": "equation",
+      "number": "33",
+      "page": 16,
+      "section": "4",
+      "source": "paper/main.tex",
+      "title": "Endpoint slope variation",
+      "lean_targets": [
+        "endpoint.endpoint_nonneg"
+      ],
+      "exact_checks": [
+        "C11"
+      ],
+      "covered": "(33) is the Lean definition KE02.endpointVariation; it is nonnegative for convex F, 0 < θ ≤ 1/2 and h > 0.",
+      "not_covered": "Convexity of the spectral function F, Lemma 2.1, which enters as a premise."
+    },
+    {
+      "label": "eq:potential-controls-S",
+      "kind": "equation",
+      "number": "34",
+      "page": 17,
+      "section": "4",
+      "source": "paper/main.tex",
+      "title": "Endpoint slopes control the centered slope variation",
+      "lean_targets": [
+        "endpoint.centered_le_endpoint"
+      ],
+      "exact_checks": [
+        "C11"
+      ],
+      "covered": "(34) for convex F, 0 < θ ≤ 1/2 and h > 0.",
+      "not_covered": "Convexity of the spectral function F, Lemma 2.1, which enters as a premise."
+    },
+    {
+      "label": "eq:minimum-oracle-accuracy",
+      "kind": "equation",
+      "number": "40",
+      "page": 20,
+      "section": "4",
+      "source": "paper/main.tex",
+      "title": "The smallest requested accuracy",
+      "lean_targets": [
+        "run.min_accuracy",
+        "run.tolerance_upper"
+      ],
+      "exact_checks": [
+        "C12"
+      ],
+      "covered": "Every request of a run has an accuracy above δ/(2^16 K n^4) and at most δ/(512n).",
+      "not_covered": "The consequence log(n/ε_min) = O(1 + log(n/δ)) and the total cost."
+    },
+    {
+      "label": "app:oracle",
+      "kind": "section",
+      "number": "A",
+      "page": 27,
+      "section": "A",
+      "source": "paper/main.tex",
+      "title": "The spectral-function oracle: algebraic details",
+      "lean_targets": [
+        "continuant.det_tridiag",
+        "continuant.det_char",
+        "continuant.symmetric_coeff",
+        "graeffe.even_coeff",
+        "graeffe.odd_coeff",
+        "graeffe.reconstruct",
+        "graeffe.one_step",
+        "graeffe.iterate",
+        "coefficients.expansion",
+        "coefficients.leading",
+        "coefficients.positive",
+        "coefficients.bounds",
+        "rootExtraction.graeffe_coeff",
+        "rootExtraction.coeff_bounds",
+        "rootExtraction.iterated_sqrt",
+        "rootExtraction.two_rpow_sub_one_le",
+        "rootExtraction.root_error",
+        "rootExtraction.steps_least",
+        "rootExtraction.steps_doubling",
+        "rootExtraction.steps_choice",
+        "rootExtraction.weighted_error",
+        "rootExtraction.pipeline"
+      ],
+      "exact_checks": [
+        "A01",
+        "A02",
+        "A04",
+        "C14"
+      ],
+      "covered": "The determinant of a tridiagonal matrix over any commutative ring R : Type is the continuant, and for every real tridiagonal A the recurrence ends in det(zI + 2I + A), with c_i = A_(i,i+1)^2 for symmetric A; the even/odd split, one Graeffe step and its k-th iterate ∏(z + r_j^(2^k)) for all real roots; the e_j as elementary symmetric sums, positive, with p_j ≤ e_j ≤ C(n,j) p_j ≤ 2^n p_j; the R-th root as k square roots; 2^x - 1 ≤ x on [0, 1]; |r̂_j - r_j| ≤ 4n/R; k least with Rη ≥ 8n and found by doubling R from 1, so that 8n/η ≤ R < 16n/η and 4n/R ≤ η/2; η = ε/Σj and the index-wise matching λ̂_j = r̂_(n+1-j) - 2 with weighted error at most ε.",
+      "not_covered": "P(z) = ∏(z + r_j) and r_j ∈ (0, 4), which need the spectral theorem and are premises in Lean; the complex Hermitian c_i = (Re A_(i,i+1))^2 + (Im A_(i,i+1))^2, checked exactly on instances only; balanced product trees, Fourier transforms and roots of unity; the operation counts; and the coefficient growth e_j ≤ 2^n 4^(nR)."
+    },
+    {
+      "label": "eq:graeffe",
+      "kind": "equation",
+      "number": "43",
+      "page": 27,
+      "section": "A",
+      "source": "paper/main.tex",
+      "title": "The Graeffe ratio bound",
+      "lean_targets": [
+        "coefficients.ratio_bounds",
+        "rootExtraction.ratio_root"
+      ],
+      "exact_checks": [
+        "A03"
+      ],
+      "covered": "(43) for positive nonincreasing roots and R = 2^k, in ratio form and with real R-th roots.",
+      "not_covered": "That the roots are r_j = 2 + λ_(n+1-j)(A), which needs the spectral theorem."
+    }
+  ]
+}

@@ -7,6 +7,7 @@ Wenqi Zhu — Mathematical Institute, Woodstock Road, University of Oxford, Oxfo
 Ping Nie — David R. Cheriton School of Computer Science, University of Waterloo — ping.nie@uwaterloo.ca
 
 Read the [paper](paper/main.pdf) and its [LaTeX source](paper/main.tex).
+The paper is also available on arXiv: [arXiv:2611.21055](https://arxiv.org/abs/2611.21055).
 The main theorem answers the
 [catalogue question KE-02](https://github.com/ajt60gaibb/OpenProblemsInNLA/blob/3017ea813328900a812c0c105ca16ad6f694857e/eigenvalues-and-inverse-problems/KE-02/README.md),
 which asks for a nearly linear deterministic construction of a small

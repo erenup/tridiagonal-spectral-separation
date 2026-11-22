@@ -36,6 +36,9 @@ preferred-citation:
   type: unpublished
   license: CC-BY-SA-4.0
   title: "A Deterministic Algorithm for Eigenvalue Separation in Tridiagonal Matrices"
+  doi: "10.48550/arXiv.2611.21055"
+  url: "https://arxiv.org/abs/2611.21055"
+  year: 2026
   authors:
     - given-names: "Wenqi"
       family-names: "Zhu"
